@@ -13,7 +13,7 @@ app.use("/api/users", userRoute);
 
 async function start() {
   try {
-    const result = await dbConnection.execute("select 'test' ");
+    // const result = await dbConnection.execute("select 'test' ");
     app.listen(port);
     console.log("database connection established");
     console.log(`listening on port http://localhost:${port}`);

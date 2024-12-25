@@ -1,34 +1,38 @@
 const { StatusCodes } = require("http-status-codes");
 const { query } = require("../../config/db");
 const { genSalt, hash, compare } = require("bcrypt");
+const generateToken = require("../../utils/token"); // Ensure this path is correct
 
 async function register(req, res) {
   const { username, first_name, last_name, email, password } = req.body;
+
+  // Check for required fields
   if (!email || !password || !first_name || !last_name || !username) {
-    console.log("here");
-    return res.status(400).json({ message: "All fields are required" });
+    console.log("Missing fields in registration");
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "All fields are required" });
   }
 
   try {
     // Check if the user already exists
-    const [user] = await query(
-      "SELECT username, id FROM Account WHERE username = ? OR email = ?",
+    const [existingUser] = await query(
+      "SELECT username, email FROM Account WHERE username = ? OR email = ?",
       [username, email]
     );
 
-    if (user && user.length > 0) {
-      console.log("here2");
-
+    if (existingUser && existingUser.length > 0) {
+      console.log("User already exists");
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: "Email or username already registered" });
     }
 
-    // Check if the password length is valid
+    // Check password length
     if (password.length < 8) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ message: "Password must be at least 7 characters" });
+        .json({ message: "Password must be at least 8 characters" });
     }
 
     // Encrypt the password
@@ -45,18 +49,17 @@ async function register(req, res) {
       .status(StatusCodes.CREATED)
       .json({ message: "User created successfully" });
   } catch (error) {
-    console.error(error.message);
+    console.error("Registration error:", error.message);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "Something went wrong, please try again later" });
   }
 }
 
-const { generateToken } = require("../../utils/token"); // Adjust the path as necessary
-
 async function login(req, res) {
   const { email, password } = req.body;
 
+  // Check for required fields
   if (!email || !password) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -85,17 +88,18 @@ async function login(req, res) {
         .json({ message: "Invalid email or password" });
     }
 
-    // Generate a token (assuming you have a function to generate tokens)
+    // Generate a token
     const token = generateToken(user[0].id);
 
     return res
       .status(StatusCodes.OK)
       .json({ message: "Login successful", token });
   } catch (error) {
-    console.error(error.message);
+    console.error("Login error:", error.message);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "Something went wrong, please try again later" });
   }
 }
+
 module.exports = { register, login };
