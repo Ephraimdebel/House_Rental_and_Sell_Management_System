@@ -16,12 +16,13 @@ async function register(req, res) {
 
   try {
     // Check if the user already exists
-    const [existingUser] = await query(
+    const existingUser = await query(
       "SELECT username, email FROM Account WHERE username = ? OR email = ?",
       [username, email]
     );
 
-    if (existingUser.length) {
+    if (existingUser && existingUser.length) {
+      console.log(existingUser)
       console.log("User already exists");
       return res
         .status(StatusCodes.BAD_REQUEST)

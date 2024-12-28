@@ -14,7 +14,8 @@ CREATE TABLE Account (
 -- Table for houses
 CREATE TABLE House (
     houseId INT AUTO_INCREMENT PRIMARY KEY,   -- Auto-incrementing primary key
-    location VARCHAR(255) NOT NULL,           -- Location of the house
+    location VARCHAR(255) NOT NULL,
+    imgURL TEXT,           -- Location of the house
     price DECIMAL(10, 2) NOT NULL,            -- Price of the house
     details TEXT,                             -- Additional details
     ownerId INT NOT NULL,                     -- Reference to Account ID (foreign key)
