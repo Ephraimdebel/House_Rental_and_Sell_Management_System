@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5500;
-const dbConnection = require("./config/db");
 const cors = require("cors");
 app.use(express.json());
 app.use(cors());
@@ -14,6 +13,9 @@ app.use("/api/users", userRoute);
 // house routes middleware
 const houseRoute = require("./app/routes/house_router");
 app.use("/api", houseRoute);
+// house photo post and delete routes middleware
+const s3PostHandler = require("./app/routes/s3_post_router");
+app.use("/api", s3PostHandler);
 
 async function start() {
   try {

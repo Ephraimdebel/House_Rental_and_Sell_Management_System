@@ -19,4 +19,3 @@ router.put("/updateHouse/:houseId",authMiddleware, updateHouse);
 router.get("/filter", filter);
 
 module.exports = router;
-router.get("/house", getHouse);
