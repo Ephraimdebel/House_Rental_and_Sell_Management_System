@@ -162,6 +162,7 @@ const updateHouse = async (req, res) => {
     });
   }
 };
+
 const filter = async (req, res) => {
   const { location, minPrice, maxPrice } = req.query;
   let queryStr = "SELECT * FROM House WHERE 1=1";

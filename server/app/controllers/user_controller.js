@@ -22,7 +22,7 @@ async function register(req, res) {
     );
 
     if (existingUser && existingUser.length) {
-      console.log(existingUser)
+      console.log(existingUser);
       console.log("User already exists");
       return res
         .status(StatusCodes.BAD_REQUEST)
@@ -82,6 +82,7 @@ async function login(req, res) {
     }
 
     const userData = user[0]; // Safely access the first result
+    console.log(user);
 
     // Compare the password
     const validPassword = await compare(password, userData.password);
