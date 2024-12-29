@@ -162,26 +162,41 @@ const updateHouse = async (req, res) => {
     });
   }
 };
-
 const filter = async (req, res) => {
   const { location, minPrice, maxPrice } = req.query;
-
   let queryStr = "SELECT * FROM House WHERE 1=1";
   const params = [];
 
+  // Check for location filter
   if (location) {
     queryStr += " AND location = ?";
     params.push(location);
   }
 
+  // Check for minimum price filter
   if (minPrice) {
-    queryStr += " AND price >= ?";
-    params.push(parseInt(minPrice));
+    const minPriceValue = parseFloat(minPrice);
+    if (!isNaN(minPriceValue)) {
+      queryStr += " AND price >= ?";
+      params.push(minPriceValue);
+    } else {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "Invalid minimum price value",
+      });
+    }
   }
 
+  // Check for maximum price filter
   if (maxPrice) {
-    queryStr += " AND price <= ?";
-    params.push(parseInt(maxPrice));
+    const maxPriceValue = parseFloat(maxPrice);
+    if (!isNaN(maxPriceValue)) {
+      queryStr += " AND price <= ?";
+      params.push(maxPriceValue);
+    } else {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "Invalid maximum price value",
+      });
+    }
   }
 
   try {
@@ -193,9 +208,7 @@ const filter = async (req, res) => {
       });
     }
 
-    res.status(StatusCodes.OK).json(houses, {
-      message: "Houses retrieved successfully",
-    });
+    res.status(StatusCodes.OK).json(houses);
   } catch (error) {
     console.error("Error while searching for houses:", error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
