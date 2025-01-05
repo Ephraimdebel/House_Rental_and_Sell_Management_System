@@ -1,0 +1,244 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.hero_image {
+  width: 100%;
+  height: 110vh; /* Increased height for full image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero_image div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textContainer {
+  z-index: 1;
+  text-align: center;
+  color: white; /* Text color */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  width: 100%; /* Ensures the container is 100% width */
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.breakingLine {
+  margin: 10px 0;
+  max-width: 80%;
+}
+
+.description {
+  font-size: 1.2rem;
+  max-width: 70%;
+  margin-bottom: 2rem;
+}
+
+.searchForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.95); /* Light background */
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  margin: 0 auto; /* Center align the form */
+}
+
+.row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allows elements to wrap on smaller screens */
+}
+
+.inputContainer,
+.selectContainer,
+.rangeContainer,
+.findButton {
+  flex: 1; /* Equal width for all fields */
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer input,
+.selectContainer select,
+.rangeContainer input {
+  width: 100%; /* Ensure all inputs, selects, and range inputs have full width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.rangeContainer label,
+.inputContainer label,
+.selectContainer label {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: black;
+}
+
+.rangeContainer .priceValue {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Adjustments for consistency */
+.selectContainer select,
+.inputContainer input,
+.rangeContainer input,
+.findButton {
+  width: 100%; /* Ensure equal width for select, input, and button */
+}
+
+.findButton {
+  background: linear-gradient(45deg, #007bff, #00d2ff); /* Gradient background */
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+  box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.3);
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  width: 100%; 
+}
+
+.findButton:hover {
+  background: linear-gradient(45deg, #0056b3, #008cff); 
+  transform: translateY(-4px); /* Slight lift effect on hover */
+  box-shadow: 0px 10px 20px rgba(0, 123, 255, 0.4); /* Deeper shadow on hover */
+}
+
+.findButton:active {
+  transform: translateY(2px); /* Slight "pressed" effect when clicked */
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2); /* Smaller shadow when clicked */
+}
+
+/* Ensure the Property Scope (Rental) and the Find button are the same width */
+.row .selectContainer,
+.row .findButton {
+  flex: 1; /* Equal width */
+}
+
+.row .findButton {
+  flex: 1; /* Same flex value as Property Scope select box */
+  max-width: calc(33.33% - 1.5rem); /* Prevent button from exceeding container width */
+}
+
+.rangeWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.rangeInput {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  height: 8px;
+  background: #ddd;
+  pointer-events: none;
+}
+
+.rangeInput[type="range"] {
+  pointer-events: auto;
+}
+
+.rangeInput:first-of-type {
+  z-index: 2; /* Min range slider above the max slider */
+}
+
+.rangeContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rangeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rangeInput {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  pointer-events: auto;
+}
+
+.priceLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.priceLabels span {
+  font-size: 16px;
+  color: #858586;
+  font-weight: bold;
+}
+
+/* Add space between the input elements for a better layout */
+.rangeWrapper .rangeInput:first-of-type {
+  z-index: 2;
+}
+
+.rangeContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rangeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rangeInput {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  pointer-events: auto;
+}
+
+.priceLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.priceLabels span {
+  font-size: 16px;
+  color: #858586;
+  font-weight: bold;
+}
