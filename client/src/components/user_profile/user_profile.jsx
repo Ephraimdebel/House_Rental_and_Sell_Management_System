@@ -23,7 +23,12 @@ const UserProfile = () => {
       <h2>User Profile</h2>
       <div className="profile-card">
         <div className="profile-avatar">
-          <span>{userData.name[0]}</span>
+          <span>
+            {userData.name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")}
+          </span>
         </div>
         <div className="profile-details">
           <h3>{userData.name}</h3>
