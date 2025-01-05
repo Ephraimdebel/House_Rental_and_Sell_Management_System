@@ -1,0 +1,80 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  background-color: #f7f9fc;
+  color: #333;
+}
+.profile h2 {
+  text-align: center;
+  color: #4caf50;
+  margin-bottom: 1.5rem;
+}
+
+.profile {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #4caf50;
+  margin-bottom: 1.5rem;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-avatar {
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 2rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.profile-role {
+  font-size: 1.2rem;
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+.profile-role {
+  font-style: italic;
+  color: goldenrod !important;
+}
+
+.profile-section h4 {
+  color: #4caf50;
+  margin-top: 1rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}

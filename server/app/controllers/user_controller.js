@@ -41,6 +41,7 @@ async function register(req, res) {
     const hashedPassword = await hash(password, salt);
 
     // Insert new user into the database
+
     await query(
       "INSERT INTO Account (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)",
       [username, first_name, last_name, email, hashedPassword]
@@ -59,7 +60,7 @@ async function register(req, res) {
 
 async function login(req, res) {
   const { email, password } = req.body;
-
+  console.log(email, password);
   // Check for required fields
   if (!email || !password) {
     return res
@@ -86,6 +87,7 @@ async function login(req, res) {
 
     // Compare the password
     const validPassword = await compare(password, userData.password);
+    console.log(password, userData.password, validPassword);
 
     if (!validPassword) {
       // Fixed condition here
@@ -115,4 +117,4 @@ async function checkUser(req, res) {
   res.status(StatusCodes.OK).json({ message: "valid user", username, userid });
 }
 
-module.exports = { register, login,checkUser };
+module.exports = { register, login, checkUser };
