@@ -4,17 +4,24 @@ import Hero from "./components/hero_banner/Hero";
 import Product from "./components/product/Product";
 import ProductSale from "./components/product/ProductSale";
 import Home from "./pages/Home/Home";
+import UserProfile from "./components/user_profile/user_profile";
+import OwnerProfile from "./components/owner_profile/owner_profile";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<Hero />} />
-    //     <Route path="/products" element={<Product />} />
-    //     <Route path="/productsale" element={<ProductSale />} />
-    //   </Routes>
-    // </Router>
-    <Home />
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Product />} />
+        <Route path="/productsale" element={<ProductSale />} />
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/owner" element={<OwnerProfile />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 
