@@ -10,6 +10,7 @@ import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import HouseSale from "./components/listingProperty/HouseList";
 import HouseRent from "./components/listingProperty/HouseRent";
+import Detail from "./components/DetailPage/Detail";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/owner" element={<OwnerProfile />} />
         <Route path="/listingSale" element={<HouseSale />} />
         <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/detail" element={<Detail />} /> {/* Updated Route */}
       </Routes>
       <Footer />
     </Router>
