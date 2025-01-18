@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
 import Product from "./components/product/Product";
@@ -13,6 +13,7 @@ import HouseRent from "./components/listingProperty/HouseRent";
 import Detail from "./components/DetailPage/Detail";
 import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
+import AboutUs from "./components/AboutUs/AboutUs";
 import { ToastContainer } from "react-toastify"; // Import ToastContainer
 import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
@@ -73,6 +74,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/products" element={<Product />} />
         <Route path="/productsale" element={<ProductSale />} />
         <Route path="/user" element={<UserProfile />} />
