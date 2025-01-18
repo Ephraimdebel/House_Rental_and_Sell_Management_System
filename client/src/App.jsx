@@ -13,9 +13,12 @@ import HouseRent from "./components/listingProperty/HouseRent";
 import Detail from "./components/DetailPage/Detail";
 import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
+import AboutUs from "./components/AboutUs/AboutUs";
 import { ToastContainer } from "react-toastify"; // Import ToastContainer
 import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
+import HouseProfile from "./components/Chat/HostProfile";
+import FilterPage from "./components/filterPage/filterList";
 
 export const AppState = createContext();
 
@@ -68,11 +71,11 @@ function App() {
   },[token]);
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
-
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/products" element={<Product />} />
         <Route path="/productsale" element={<ProductSale />} />
         <Route path="/user" element={<UserProfile />} />
@@ -87,19 +90,18 @@ function App() {
               } />
       </Routes>
       <Footer />
-    <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </AppState.Provider>
-
   );
 }
 
