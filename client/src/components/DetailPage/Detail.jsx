@@ -138,25 +138,6 @@ function Detail() {
         </div>
       </div>
 
-      {/* User Section */}
-      <div className={styles.userContainer}>
-        <h3>Welcome!</h3>
-        <label htmlFor="userName" className={styles.userLabel}>
-          Enter your name:{" "}
-        </label>
-        <input
-          id="userName"
-          type="text"
-          value={userName}
-          onChange={handleUserNameChange}
-          className={styles.userInput}
-        />
-        {userName && (
-          <p className={styles.greeting}>
-            Hello, <strong>{userName}</strong>! We hope you enjoy your stay.
-          </p>
-        )}
-      </div>
 
       {/* What this place offers Section */}
       <div className={styles.amenitiesContainer}>
