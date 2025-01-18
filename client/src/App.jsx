@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
 import Product from "./components/product/Product";
@@ -18,6 +18,7 @@ import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
 
 export const AppState = createContext();
+
 
 
 
@@ -78,6 +79,8 @@ function App() {
         <Route path="/owner" element={<OwnerProfile />} />
         <Route path="/listingSale" element={<HouseSale />} />
         <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/detail" element={<Detail />} />
+        {/* Updated Route */}
         <Route path="/detail" element={<Detail />} /> {/* Updated Route */}
         <Route path="/addpropery" element={<AddHouseForm />} /> {/* Updated Route */}
         <Route path="*" element={ 
