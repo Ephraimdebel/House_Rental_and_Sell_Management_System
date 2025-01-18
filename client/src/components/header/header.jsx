@@ -21,12 +21,12 @@ const Header = () => {
             </a>
           </li>
           <li className="menu-item">
-            <a href="/sale" className="link">
+            <a href="/listingSale" className="link">
               Sale
             </a>
           </li>
           <li className="menu-item">
-            <a href="/rentals" className="link">
+            <a href="listingRent" className="link">
               Rentals
             </a>
           </li>

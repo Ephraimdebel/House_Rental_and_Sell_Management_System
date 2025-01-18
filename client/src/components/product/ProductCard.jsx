@@ -7,7 +7,7 @@ function ProductCard({ data }) {
 
   const handleAddToCart = () => {
     setAddedToCart(true);
-    // Optionally, you can display a message or perform other actions like adding to a shopping cart state
+    
   };
 
   return (
@@ -28,14 +28,14 @@ function ProductCard({ data }) {
         </div>
       </div>
 
-      {/* Add to Cart Button */}
+      {/* View Detail Button */}
       <div className={classes.productCard__buttonContainer}>
         <button
           className={classes.addToCartButton}
           onClick={handleAddToCart}
           disabled={addedToCart} // Disable button once item is added to cart
         >
-          {addedToCart ? "Added to Cart" : "Add to Cart"}
+          {addedToCart ? "Added to Cart" : "View Detail"}
         </button>
       </div>
     </div>
