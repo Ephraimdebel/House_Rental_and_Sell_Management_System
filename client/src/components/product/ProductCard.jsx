@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import classes from "./Product.module.css";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard({ data }) {
-  // State to manage the cart
-  // const [addedToCart, setAddedToCart] = useState(false);
+  const navigate = useNavigate();
 
-  // const handleAddToCart = () => {
-  //   setAddedToCart(true);
-    
-  // };
+  const handleCardClick = (id) => {
+    navigate(`/house/${id}`);
+  };
   console.log("data: ",data)
 
   return (
@@ -31,15 +30,12 @@ function ProductCard({ data }) {
 
       {/* View Detail Button */}
       <div className={classes.productCard__buttonContainer}>
-        <button
-          className={classes.addToCartButton}
-          // onClick={handleAddToCart}
-          // disabled={addedToCart} // Disable button once item is added to cart
-        >
-          {/* {addedToCart ? "Added to Cart" : "View Detail"}
-           */}
-           View Detail
-        </button>
+      <button
+    className={classes.addToCartButton}
+    onClick={() => handleCardClick(data.id)} // Corrected here
+  >
+    View Detail
+  </button>
       </div>
     </div>
   );
