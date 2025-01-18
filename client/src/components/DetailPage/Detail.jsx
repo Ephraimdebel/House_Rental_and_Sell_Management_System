@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Detail.module.css";
 
 // Import icons from React Icons
@@ -14,6 +14,12 @@ import DetailPageImg4 from "../../assets/DetailPageImg/DetailPageImg4.jpg";
 import DetailPageImg5 from "../../assets/DetailPageImg/DetailPageImg5.jpg";
 
 function Detail() {
+  const [guests, setGuests] = useState(1); // For managing the guests selection
+
+  const handleGuestChange = (event) => {
+    setGuests(event.target.value);
+  };
+
   return (
     <div className={styles.detailContainer}>
       <div className={styles.flexContainer}>
@@ -60,46 +66,71 @@ function Detail() {
         <p className={styles.price}>250 $/night</p>
       </div>
 
-      {/* House Description Section */}
-      <div className={styles.descriptionContainer}>
-        <h3>About this house</h3>
-        <p className={styles.houseDescription}>
-          This modern 4-bedroom villa is perfect for families and small groups,
-          offering plenty of space and comfort. Located in the heart of
-          Birchwood, the villa is a short distance away from local shops,
-          restaurants, and entertainment options. Enjoy breathtaking views of
-          the city from the large windows and relax in the spacious living room.
-          The house is fully equipped with modern appliances, including a
-          flat-screen TV, Wi-Fi, and a fully stocked kitchen, making it ideal
-          for both short and long stays.
-        </p>
-        <p className={styles.houseDescription}>
-          The villa features two full bathrooms, and each bedroom comes with
-          plush bedding and plenty of closet space. Outside, you'll find a
-          private patio where you can enjoy your morning coffee or dine al
-          fresco. The home is child-friendly and equipped with safety features
-          to ensure peace of mind for families with young children.
-        </p>
-      </div>
-
-      {/* Booking Section - beside the "About this house" */}
-      <div className={styles.bookingSection}>
-        <div className={styles.bookingInfo}>
-          <p className={styles.nightPrice}>$25 night</p>
-          <p className={styles.date}>Check-in: 1/19/2025</p>
-          <p className={styles.date}>Check-out: 1/24/2025</p>
-          <p className={styles.guest}>Guests: 1</p>
+      <div className={styles.descriptionReservation}>
+        <div className={styles.descriptionContainer}>
+          <h3>About this house</h3>
+          <p className={styles.houseDescription}>
+            This modern 4-bedroom villa is perfect for families and small
+            groups, offering plenty of space and comfort. Located in the heart
+            of Birchwood, the villa is a short distance away from local shops,
+            restaurants, and entertainment options. Enjoy breathtaking views of
+            the city from the large windows and relax in the spacious living
+            room. The house is fully equipped with modern appliances, including
+            a flat-screen TV, Wi-Fi, and a fully stocked kitchen, making it
+            ideal for both short and long stays.
+          </p>
+          <p className={styles.houseDescription}>
+            The villa features two full bathrooms, and each bedroom comes with
+            plush bedding and plenty of closet space. Outside, you'll find a
+            private patio where you can enjoy your morning coffee or dine al
+            fresco. The home is child-friendly and equipped with safety features
+            to ensure peace of mind for families with young children.
+          </p>
         </div>
 
-        <div className={styles.bookingDetails}>
-          <p className={styles.bookingSummary}>$25 x 5 nights</p>
-          <p className={styles.bookingAmount}>$125</p>
-          <p className={styles.bookingSummary}>Airbnb service fee</p>
-          <p className={styles.bookingAmount}>$18</p>
-          <p className={styles.total}>Total before taxes: $143</p>
+        {/* Booking Section - beside the "About this house" */}
+        <div className={styles.bookingSection}>
+          <div className={styles.bookingInfo}>
+            <p className={styles.nightPrice}>$25 night</p>
+            <div className={styles.date}>
+              <p className={styles.date}>Check-in: 1/19/2025</p>
+              <p className={styles.date}>Check-out: 1/24/2025</p>
+            </div>
+            {/* Guests dropdown */}
+            <div className={styles.guestContainer}>
+              <label htmlFor="guests" className={styles.guestLabel}>
+                Guests:{" "}
+              </label>
+              <select
+                id="guests"
+                value={guests}
+                onChange={handleGuestChange}
+                className={styles.guestDropdown}
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((guestCount) => (
+                  <option key={guestCount} value={guestCount}>
+                    {guestCount} {guestCount === 1 ? "Guest" : "Guests"}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <button className={styles.reserveButton}>Reserve</button>
+          <div className={styles.bookingDetails}>
+            <div className={styles.bookingPrice}>
+              <p className={styles.bookingSummary}>$25 x 5 nights</p>
+              <p className={styles.bookingAmount}>$125</p>
+            </div>
+            <div className={styles.RentalFee}>
+              <p className={styles.bookingSummary}>Service fee</p>
+              <p className={styles.bookingAmount}>$18</p>
+            </div>
+            <div className={styles.totalBeforeTax}>
+              <p className={styles.total}>Total before taxes: </p>
+              <p className={styles.Price}>$143</p>
+            </div>
+          </div>
         </div>
-
-        <button className={styles.reserveButton}>Reserve</button>
       </div>
 
       {/* What this place offers Section */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
 import Product from "./components/product/Product";
@@ -15,6 +15,7 @@ import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
 
 export const AppState = createContext();
+
 
 
 
@@ -65,7 +66,7 @@ function App() {
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
 
-    <Router>
+
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -76,13 +77,14 @@ function App() {
         <Route path="/owner" element={<OwnerProfile />} />
         <Route path="/listingSale" element={<HouseSale />} />
         <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/detail" element={<Detail />} />
+        {/* Updated Route */}
         <Route path="/detail" element={<Detail />} /> {/* Updated Route */}
         <Route path="*" element={ 
               <Four04 />
               } />
       </Routes>
       <Footer />
-    </Router>
 
     </AppState.Provider>
 
