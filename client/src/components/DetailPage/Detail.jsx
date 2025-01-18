@@ -15,9 +15,14 @@ import DetailPageImg5 from "../../assets/DetailPageImg/DetailPageImg5.jpg";
 
 function Detail() {
   const [guests, setGuests] = useState(1); // For managing the guests selection
+  const [userName, setUserName] = useState(""); // For managing the user's name
 
   const handleGuestChange = (event) => {
     setGuests(event.target.value);
+  };
+
+  const handleUserNameChange = (event) => {
+    setUserName(event.target.value);
   };
 
   return (
@@ -131,6 +136,26 @@ function Detail() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* User Section */}
+      <div className={styles.userContainer}>
+        <h3>Welcome!</h3>
+        <label htmlFor="userName" className={styles.userLabel}>
+          Enter your name:{" "}
+        </label>
+        <input
+          id="userName"
+          type="text"
+          value={userName}
+          onChange={handleUserNameChange}
+          className={styles.userInput}
+        />
+        {userName && (
+          <p className={styles.greeting}>
+            Hello, <strong>{userName}</strong>! We hope you enjoy your stay.
+          </p>
+        )}
       </div>
 
       {/* What this place offers Section */}

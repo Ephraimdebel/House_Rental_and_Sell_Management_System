@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="nav">
-        <div className="logo">G-5 Houses</div>
+        <div className="logo">Infinity Houses</div>
         <button
           className="menu-icon"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
