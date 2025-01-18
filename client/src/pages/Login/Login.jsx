@@ -6,7 +6,7 @@ import "./Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppState } from "../../App"; // Assuming you have a context for auth state
 import { toast } from "react-toastify"; // Import toast
-import im1 from "../../assets/image/loginimage.jpg";
+import im1 from "../../assets/image/loginImage.jpg";
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true); // Tracks current form (Login or Signup)
   const [formData, setFormData] = useState({
