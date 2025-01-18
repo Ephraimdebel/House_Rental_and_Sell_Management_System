@@ -1,5 +1,5 @@
 import React from 'react'
-import { productData } from "./productData"; // Use productData instead of categoryInfos
+import { productData } from "./productData";
 import breakingLine from "../../assets/heroImage/breakingLine.png";
 import ProductCard from "./ProductCard";
 import classes from "./Product.module.css";
