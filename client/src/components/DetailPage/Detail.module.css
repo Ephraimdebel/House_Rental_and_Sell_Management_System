@@ -115,8 +115,9 @@ h3 {
   font-size: 16px;
   color: #333;
 }
-
-/* Booking Details */
+/* ===================== */
+/* Booking Details Styles */
+/* ===================== */
 .bookingDetails {
   flex: 1;
   padding: 10px;
@@ -125,18 +126,6 @@ h3 {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.bookingPrice{
-  display: flex;
-  gap: 200px;
-}
-.RentalFee{
-  display: flex;
-  gap: 220px;
-}
-.totalBeforeTax{
-  display: flex;
-  gap: 140px;
-}
 .bookingAmount,
 .bookingSummary {
   font-size: 16px;
@@ -151,7 +140,26 @@ h3 {
   margin-top: 20px;
 }
 
-/* Reserve Button */
+.bookingPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.RentalFee {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.totalBeforeTax {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
 .reserveButton {
   background: linear-gradient(to right, #009DDE, #009DDE);
   color: white;
@@ -163,8 +171,7 @@ h3 {
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .reserveButton:hover {
@@ -198,17 +205,18 @@ p {
   color: #333;
 }
 .bookingSection {
-  flex-direction: column; 
+  position: sticky; 
+  right: 20px;
+  top: calc(100px + 250px); 
+  flex-direction: column;
   justify-content: space-between;
   padding: 30px;
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  margin-top: 40px;
-  width: 30%; 
-  position: sticky;
-  top: 100px;
+  width: 40%; 
 }
+
 
 .guestContainer {
   display: flex;
@@ -224,7 +232,9 @@ p {
 }
 
 .date {
-  margin: 0px 10px 20px 10px;
+  margin-left: 5px;
+  margin-bottom: 20px;
+  margin-right: 5px;
 }
 
 .date p {

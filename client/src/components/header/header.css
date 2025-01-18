@@ -1,9 +1,8 @@
 /* General header styling */
 .header {
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  padding: 20px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color:  #ecf0f1;
+  color: #2c3e50;
+  padding: 30px 100px 30px 30px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -29,7 +28,7 @@
   background: none;
   border: none;
   font-size: 3rem;
-  color: #ecf0f1;
+  color:#009dde ;
   cursor: pointer;
 }
 
@@ -48,26 +47,14 @@
 }
 
 .link {
+  font-size: 20px;
   text-decoration: none;
-  color: #ecf0f1;
+  color: #333;
   transition: color 0.3s ease;
 }
 
 .link:hover {
-  color: #f39c12;
-}
-
-/* Search bar */
-.search-area {
-  flex-grow: 1;
-}
-
-.search-input {
-  padding: 5px 10px;
-  border: 1px solid #bdc3c7;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  outline: none;
+  color: #009dde;
 }
 
 /* Responsive styles */
