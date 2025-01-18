@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="nav">
-        <div className="logo">G-5 Houses</div>
+        <div className="logo">Infinity Houses</div>
         <button
           className="menu-icon"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -31,11 +31,6 @@ const Header = () => {
             </a>
           </li>
           <li className="menu-item">
-            <a href="/about" className="link">
-              About Us
-            </a>
-          </li>
-          <li className="menu-item">
             <a href="/contact" className="link">
               Contact Us
             </a>
@@ -46,21 +41,9 @@ const Header = () => {
             </a>
           </li>
           <li className="menu-item">
-            <a href="/logout" className="link">
-              Logout
-            </a>
-          </li>
-          <li className="menu-item">
             <a href="/user" className="link">
               Profile
             </a>
-          </li>
-          <li className="menu-item search-area">
-            <input
-              type="text"
-              placeholder="Search area..."
-              className="search-input"
-            />
           </li>
         </ul>
       </nav>
