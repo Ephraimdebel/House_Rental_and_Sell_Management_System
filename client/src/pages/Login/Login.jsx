@@ -86,11 +86,11 @@ const Login = () => {
     try {
       if (isLogin) {
         // Login Logic
-        const response = await axios.post("/users/login", {
+        const response = await axios.post("users/login", {
           email,
           password,
         });
-
+        console.log(response)
         if (response.status === 200) {
           toast.success("Login successful!");
           localStorage.setItem("token", response.data.token);
@@ -106,8 +106,8 @@ const Login = () => {
         // Signup Logic
         const response = await axios.post("/users/register", {
           username,
-          firstname: firstName,
-          lastname: lastName,
+          first_name: firstName,
+          last_name: lastName,
           email,
           password,
         });

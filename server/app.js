@@ -18,7 +18,7 @@ const houseRoute = require("./app/routes/house_router");
 app.use("/api", houseRoute);
 
 
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // house photo post and delete routes middleware
 // const s3PostHandler = require("./app/routes/s3_post_router");
