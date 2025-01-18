@@ -1,8 +1,9 @@
+
 const jwt = require("jsonwebtoken");
-
+dotenv = require("dotenv");
 // Define a secret key (use a strong, random key and store it in environment variables)
-const SECRET_KEY = process.env.JWT_SECRET || "your-very-secure-secret-key";
-
+const SECRET_KEY = process.env.JWT_SECRET
+console.log(process.env.JWT_SECRET);
 // Token expiration time (e.g., 1 hour)
 const TOKEN_EXPIRATION = "1h";
 
