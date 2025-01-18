@@ -23,6 +23,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 // house photo post and delete routes middleware
 // const s3PostHandler = require("./app/routes/s3_post_router");
 // app.use("/api", s3PostHandler);
+// const s3PostHandler = require("./app/routes/s3_post_router");
+// app.use("/api", s3PostHandler);
 
 
 const bookingRoute = require("./app/routes/booking.routes");

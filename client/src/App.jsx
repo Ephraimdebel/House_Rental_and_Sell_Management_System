@@ -1,20 +1,32 @@
-import React, { createContext, useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import Hero from "./components/hero_banner/Hero";
+import Product from "./components/product/Product";
+import ProductSale from "./components/product/ProductSale";
+import Home from "./pages/Home/Home";
+import UserProfile from "./components/user_profile/user_profile";
+import OwnerProfile from "./components/owner_profile/owner_profile";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
+import HouseSale from "./components/listingProperty/HouseList";
+import HouseRent from "./components/listingProperty/HouseRent";
+import Detail from "./components/DetailPage/Detail";
 import Login from "./pages/Login/Login";
-import axios from "./Api/axios";
 import Four04 from "./components/Four04/Four04";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import { ToastContainer } from "react-toastify"; // Import ToastContainer
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
-// import LayOut from "./pages/LayOut/LayOut";
+
 export const AppState = createContext();
 
 
+
 function App() {
+
+
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  // Function to handle logout
   const handleLogout = () => {
+    // Remove token and user-related data from localStorage
     localStorage.removeItem("token");
 
 
@@ -50,35 +62,30 @@ function App() {
       checkUser();
     }
   },[token]);
-  // console.log(user)
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
+
+    <Router>
+      <Header />
       <Routes>
-        {/* <Route path="/" element={<LayOut />}>
-       
-          <Route path="/" element={
-             <ProtectedRoute msg="Welcome to Evangadi Forum" redirect = "/">
-              <HomePage />
-              </ProtectedRoute>} />
-          
-          <Route path="*" element={ 
-            <Four04 />
-          } />
-        </Route> */}
-          <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/products" element={<Product />} />
+        <Route path="/productsale" element={<ProductSale />} />
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/owner" element={<OwnerProfile />} />
+        <Route path="/listingSale" element={<HouseSale />} />
+        <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/detail" element={<Detail />} /> {/* Updated Route */}
+        <Route path="*" element={ 
+              <Four04 />
+              } />
       </Routes>
-      <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+      <Footer />
+    </Router>
+
     </AppState.Provider>
+
   );
 }
 
