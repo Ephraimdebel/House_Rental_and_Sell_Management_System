@@ -1,7 +1,9 @@
 const { StatusCodes } = require("http-status-codes");
-const { query } = require("../../config/db");
+const dbConnection = require("../../config/db");
 const { genSalt, hash, compare } = require("bcrypt");
 const generateToken = require("../../utils/token"); // Ensure this path is correct
+const jwt = require("jsonwebtoken");
+
 
 async function register(req, res) {
   const { username, first_name, last_name, email, password } = req.body;
@@ -16,8 +18,8 @@ async function register(req, res) {
 
   try {
     // Check if the user already exists
-    const existingUser = await query(
-      "SELECT username, email FROM Account WHERE username = ? OR email = ?",
+    const [existingUser] = await dbConnection.query(
+      "SELECT userName, email FROM Users WHERE userName = ? OR email = ?",
       [username, email]
     );
 
@@ -41,9 +43,8 @@ async function register(req, res) {
     const hashedPassword = await hash(password, salt);
 
     // Insert new user into the database
-
-    await query(
-      "INSERT INTO Account (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)",
+    await dbConnection.query(
+      "INSERT INTO Users (UserName, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)",
       [username, first_name, last_name, email, hashedPassword]
     );
 
@@ -70,8 +71,8 @@ async function login(req, res) {
 
   try {
     // Check if the user exists
-    const user = await query(
-      "SELECT id, username, password FROM Account WHERE email = ?",
+    const [user] = await dbConnection.query(
+      "SELECT id, userName, password FROM Users WHERE email = ?",
       [email]
     );
 
@@ -83,7 +84,7 @@ async function login(req, res) {
     }
 
     const userData = user[0]; // Safely access the first result
-    console.log(user);
+    console.log("userdata",userData);
 
     // Compare the password
     const validPassword = await compare(password, userData.password);
@@ -98,11 +99,18 @@ async function login(req, res) {
     }
 
     // Generate a token
-    const token = generateToken(userData.id);
+    // const token = generateToken(userData.id);
 
-    return res
-      .status(StatusCodes.OK)
-      .json({ message: "Login successful", token });
+    const username = user[0].userName
+    const userid = user[0].id
+    const token =jwt.sign({username,userid},process.env.JWT_SECRET,{expiresIn:"1h"})
+
+    return res.status(StatusCodes.OK).json({msg:"login success",token,username,userid})
+
+
+    // return res
+    //   .status(StatusCodes.OK)
+    //   .json({ message: "Login successful", token });
   } catch (error) {
     console.error("Login error:", error.message, error.stack);
     return res

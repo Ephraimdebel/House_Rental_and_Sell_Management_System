@@ -15,6 +15,7 @@ try{
     req.user = {username,userid}
     next()
 }catch(err){
+    console.log(err)
     return res.status(StatusCodes.UNAUTHORIZED).json({msg:"2 unauthorized"})
 
 }
