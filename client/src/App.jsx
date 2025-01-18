@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
 import Product from "./components/product/Product";
@@ -13,6 +13,9 @@ import HouseRent from "./components/listingProperty/HouseRent";
 import Detail from "./components/DetailPage/Detail";
 import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
+import { ToastContainer } from "react-toastify"; // Import ToastContainer
+import axios from "./Api/axios";
+import AddHouseForm from "./components/AddProperty/AddProperty ";
 
 export const AppState = createContext();
 
@@ -45,7 +48,7 @@ function App() {
   // Function to check if user is logged in
   async function checkUser() {
     try {
-      const { data } = await axios.get("/users/check", {
+      const { data } = await axios.get("/users/checkUser", {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -66,7 +69,6 @@ function App() {
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
 
-
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -80,12 +82,23 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         {/* Updated Route */}
         <Route path="/detail" element={<Detail />} /> {/* Updated Route */}
+        <Route path="/addpropery" element={<AddHouseForm />} /> {/* Updated Route */}
         <Route path="*" element={ 
               <Four04 />
               } />
       </Routes>
       <Footer />
-
+    <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
     </AppState.Provider>
 
   );
