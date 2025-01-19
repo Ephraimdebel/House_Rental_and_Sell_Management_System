@@ -10,11 +10,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 //user routes middleware
-const userRoute = require("./app/routes/user_router");
+const userRoute = require("./app/routes/user.routes");
 app.use("/api/users", userRoute);
 
 // house routes middleware
-const houseRoute = require("./app/routes/house_router");
+const houseRoute = require("./app/routes/house.routes");
 app.use("/api", houseRoute);
 
 
