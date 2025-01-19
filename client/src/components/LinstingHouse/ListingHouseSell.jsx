@@ -49,6 +49,7 @@ const ListingHouseSell = () => {
       {houses?.map((house) => (
         <FilterCard
           key={house.id}
+          id={house.id}
           title={house.title}
           location={house.city}
           price={house.price}
