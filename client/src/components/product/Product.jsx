@@ -6,13 +6,15 @@ import classes from "./Product.module.css";
 function Product() {
   // State to store the fetched data
   const [productData, setProductData] = useState([]);
-  
+
   // Function to fetch data from the backend
   const fetchProductData = async () => {
     try {
-      const response = await fetch("http://localhost:5500/api/housetype?type_id=1");
+      const response = await fetch(
+        "http://10.5.90.124:5500/api/housetype?type_id=1"
+      );
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setProductData(data.data); // Store the data in state
       // if (data.message === "Listings with type_id 2 retrieved successfully") {
       // } else {
@@ -21,7 +23,7 @@ function Product() {
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+  };
 
   // Fetch data when the component mounts
   useEffect(() => {
@@ -49,9 +51,7 @@ function Product() {
 
       <div className={classes.product__grid}>
         {productData.length > 0 ? (
-          productData.map((info) => (
-            <ProductCard key={info.id} data={info} />
-          ))
+          productData.map((info) => <ProductCard key={info.id} data={info} />)
         ) : (
           <p>Loading...</p>
         )}

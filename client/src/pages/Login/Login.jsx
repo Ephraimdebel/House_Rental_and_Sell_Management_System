@@ -5,7 +5,7 @@ import axios from "../../Api/axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppState } from "../../App"; // Assuming you have a context for auth state
 import { toast } from "react-toastify"; // Import toast
-import im1 from "../../assets/image/loginimage.jpg";
+import im1 from "../../assets/image/loginImage.jpg";
 import classes from "./Login.module.css";
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true); // Tracks current form (Login or Signup)
@@ -19,11 +19,9 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-
-
   const navigate = useNavigate();
-  const navStateData =useLocation()
-  console.log(navStateData)
+  const navStateData = useLocation();
+  console.log(navStateData);
   // const { setUser } = useContext(AppState); // Access setUser if needed
   const { setUser, user } = useContext(AppState); // Access user context
 
@@ -90,17 +88,17 @@ const Login = () => {
           email,
           password,
         });
-        console.log(response)
+        console.log(response);
         if (response.status === 200) {
           toast.success("Login successful!");
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("username", response.data.username);
           localStorage.setItem("userid", response.data.userid);
           setUser(response.data); // Update user context if necessary
-
-          
-        }else{
-          toast.error("Login failed. Please check your credentials. if you don't have an account, please signup first.");
+        } else {
+          toast.error(
+            "Login failed. Please check your credentials. if you don't have an account, please signup first."
+          );
         }
       } else {
         // Signup Logic
@@ -122,12 +120,12 @@ const Login = () => {
             firstName: "",
             lastName: "",
           });
-        }else{
+        } else {
           toast.error("Signup failed. Please try again.");
         }
       }
     } catch (error) {
-      console.error("My current error",error?.response?.data?.msg);
+      console.error("My current error", error?.response?.data?.msg);
       if (
         error.response ||
         error.response.data ||
@@ -147,7 +145,7 @@ const Login = () => {
       console.log("User is set, navigating...");
       navigate(navStateData.state?.redirect || "/", { replace: true });
     }
-  }, [user, navigate, navStateData.state?.redirect]);  // Trigger navigation when user changes
+  }, [user, navigate, navStateData.state?.redirect]); // Trigger navigation when user changes
 
   // Toggle between Login and Signup forms
   const toggleForm = () => {
@@ -256,7 +254,11 @@ const Login = () => {
             </div>
 
             {/* Submit Button */}
-            <button className={classes.login_button} type="submit" disabled={loading}>
+            <button
+              className={classes.login_button}
+              type="submit"
+              disabled={loading}
+            >
               {loading
                 ? isLogin
                   ? "Logging in..."
@@ -275,7 +277,7 @@ const Login = () => {
           <a href="/about">About</a>
           <h1>Infinity Houses</h1>
           <div className={classes.image_container}>
-            <img src={im1} alt=""/>
+            <img src={im1} alt="" />
             <a href="/how-it-works">
               <button className={classes.last_button}>How it works</button>
             </a>
