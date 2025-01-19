@@ -68,6 +68,7 @@ const ListingHouseRent = () => {
             },
           ]}
           imageUrl={house.listingPhotoPaths[0]}
+          type={"rent"}
         />
       ))}
     </div>

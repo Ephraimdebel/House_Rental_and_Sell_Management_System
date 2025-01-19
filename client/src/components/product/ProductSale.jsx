@@ -39,7 +39,7 @@ function Product() {
   return (
     <div className={classes.product__container}>
       <div className={classes.product__intro}>
-        <h2>Properties For Sell</h2>
+        <h2>Properties For Sale</h2>
         <img
           src={breakingLine}
           alt="Breaking Line"

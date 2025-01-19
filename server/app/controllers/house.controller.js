@@ -129,6 +129,39 @@ const getAllListings = async (req, res) => {
 };
 
 
+const getAllListingsNew = async (req, res) => {
+  console.log("Fetching all listings...");
+  try {
+    // Query to fetch specific fields and join with Types and Categories tables
+    const query = `
+     SELECT 
+    l.id,
+    u.userName AS creator_name, -- Assuming 'name' is the column for the user's name in the Users table
+    l.title,
+    t.name AS type, -- Assuming 'name' is the column for type in the Types table
+    l.city,
+    l.createdAt,
+    c.name AS category -- Assuming 'name' is the column for category in the Categories table
+FROM listings l
+JOIN users u ON l.creator_id = u.id -- Join with Users table to get the creator's name
+JOIN types t ON l.type_id = t.id -- Join with Types table to get the type name
+JOIN categories c ON l.category_id = c.id -- Join with Categories table to get the category name
+
+    `;
+
+    // Execute the query
+    const results = await dbConnection.query(query);
+
+    // Return the results
+    res.status(200).json({
+      message: "All listings retrieved successfully",
+      data: results[0], // Use results[0] if using mysql2's promise API
+    });
+  } catch (err) {
+    console.error("Error fetching listings:", err);
+    res.status(500).json({ message: "Error fetching listings", error: err.message });
+  }
+};
 
 const getListingsByType = async (req, res) => {
   console.log("Fetching listings by type with pagination...", req.query);
@@ -273,5 +306,62 @@ const getFilteredHouses = async (req, res) => {
 };
 
 
+const deleteProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-module.exports = { addHouse, getAllListings ,getHouseDetails,getListingsByType,getFilteredHouses};
+    // Validate input
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ message: "Invalid or missing property ID" });
+    }
+
+    // Check if the property exists
+    const checkQuery = `
+      SELECT * FROM listings WHERE id = ?
+    `;
+    const [property] = await dbConnection.query(checkQuery, [id]);
+
+    if (property.length === 0) {
+      return res.status(404).json({ message: "Property not found" });
+    }
+
+    // Ensure the user is authorized to delete the property
+    const isAdmin = req.user.role === "admin";
+    const isOwner = property[0].creator_id === req.user.userid;
+
+    if (!isAdmin && !isOwner) { // Corrected logic: user must be either admin or owner
+      return res.status(403).json({ message: "You are not authorized to delete this property" });
+    }
+
+    // Delete the property
+    const deleteQuery = `
+      DELETE FROM listings WHERE id = ?
+    `;
+    await dbConnection.query(deleteQuery, [id]);
+
+    // Optionally, log the deletion to notifications or audit logs
+    const notificationQuery = `
+      INSERT INTO notifications (user_id, message)
+      VALUES (?, ?)
+    `;
+    const notificationValues = [
+      req.user.userid,
+      `Listing "${property[0].title}" deleted successfully`,
+    ];
+
+    await dbConnection.query(notificationQuery, notificationValues);
+
+    res.status(200).json({ message: "Property deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting property:", error.message);
+    res.status(500).json({
+      message: "An error occurred while deleting the property",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+module.exports = { addHouse, getAllListings ,getHouseDetails,getListingsByType,getFilteredHouses,deleteProperty,getAllListingsNew};

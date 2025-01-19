@@ -62,6 +62,7 @@ async function register(req, res) {
 async function login(req, res) {
   const { email, password } = req.body;
   console.log(email, password);
+  
   // Check for required fields
   if (!email || !password) {
     return res
@@ -70,9 +71,9 @@ async function login(req, res) {
   }
 
   try {
-    // Check if the user exists
+    // Check if the user exists, including the 'role' field
     const [user] = await dbConnection.query(
-      "SELECT id, userName, password FROM Users WHERE email = ?",
+      "SELECT id, userName, password, role FROM Users WHERE email = ?",
       [email]
     );
 
@@ -84,33 +85,27 @@ async function login(req, res) {
     }
 
     const userData = user[0]; // Safely access the first result
-    console.log("userdata",userData);
+    console.log("userdata", userData);
 
     // Compare the password
     const validPassword = await compare(password, userData.password);
     console.log(password, userData.password, validPassword);
 
     if (!validPassword) {
-      // Fixed condition here
       console.log("Invalid email or password - password mismatch");
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ message: "Invalid email or password" });
     }
 
-    // Generate a token
-    // const token = generateToken(userData.id);
+    // Generate a token with the user's role included
+    const username = userData.userName;
+    const userid = userData.id;
+    const role = userData.role; // Get the role from the database
 
-    const username = user[0].userName
-    const userid = user[0].id
-    const token =jwt.sign({username,userid},process.env.JWT_SECRET,{expiresIn:"1d"})
+    const token = jwt.sign({ username, userid, role }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-    return res.status(StatusCodes.OK).json({msg:"login success",token,username,userid})
-
-
-    // return res
-    //   .status(StatusCodes.OK)
-    //   .json({ message: "Login successful", token });
+    return res.status(StatusCodes.OK).json({ msg: "Login success", token, username, userid, role });
   } catch (error) {
     console.error("Login error:", error.message, error.stack);
     return res
@@ -119,10 +114,135 @@ async function login(req, res) {
   }
 }
 
+
+
+
+
+async function updateUserRoleToHost(req, res) {
+  const { userId } = req.params;  // Assuming userId is passed in the URL parameters
+console.log(userId)
+  try {
+    // Check if the user exists
+    const [user] = await dbConnection.query(
+      "SELECT id FROM Users WHERE id = ?",
+      [userId]
+    );
+
+    if (!user || user.length === 0) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "User not found" });
+    }
+
+    // Update the user's role to 'host'
+    await dbConnection.query(
+      "UPDATE Users SET role = ? WHERE id = ?",
+      ['host', userId]
+    );
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: "User role updated to host successfully" });
+  } catch (error) {
+    console.error("Error updating user role to host:", error.message);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Something went wrong, please try again later" });
+  }
+}
+
+async function updateUserRoleToGuest(req, res) {
+  const { userId } = req.params;  // Assuming userId is passed in the URL parameters
+
+  try {
+    // Check if the user exists
+    const [user] = await dbConnection.query(
+      "SELECT id FROM Users WHERE id = ?",
+      [userId]
+    );
+
+    if (!user || user.length === 0) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "User not found" });
+    }
+
+    // Update the user's role to 'guest'
+    await dbConnection.query(
+      "UPDATE Users SET role = ? WHERE id = ?",
+      ['guest', userId]
+    );
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: "User role updated to guest successfully" });
+  } catch (error) {
+    console.error("Error updating user role to guest:", error.message);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Something went wrong, please try again later" });
+  }
+}
+
+
+async function getAllUsers(req, res) {
+  try {
+    // Fetch all users from the database
+    const [users] = await dbConnection.query(
+      "SELECT id, userName, email, role FROM Users"
+    );
+
+    if (users.length === 0) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "No users found" });
+    }
+
+    // Send back the list of users
+    return res.status(StatusCodes.OK).json({ users });
+  } catch (error) {
+    console.error("Error fetching users:", error.message);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Something went wrong, please try again later" });
+  }
+}
+
+async function deleteUser(req, res) {
+  const { id } = req.params;
+
+  try {
+    // Check if the user exists
+    const [user] = await dbConnection.query(
+      "SELECT id FROM Users WHERE id = ?",
+      [id]
+    );
+
+    if (user.length === 0) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "User not found" });
+    }
+
+    // Delete the user
+    await dbConnection.query("DELETE FROM Users WHERE id = ?", [id]);
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error.message);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Something went wrong, please try again later" });
+  }
+}
+
+
 async function checkUser(req, res) {
   const username = req.user.username;
   const userid = req.user.userid;
   res.status(StatusCodes.OK).json({ message: "valid user", username, userid });
 }
 
-module.exports = { register, login, checkUser };
+module.exports = { register, login, checkUser ,updateUserRoleToHost, updateUserRoleToGuest,getAllUsers,deleteUser};

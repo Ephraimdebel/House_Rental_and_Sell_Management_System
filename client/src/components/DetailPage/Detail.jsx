@@ -118,15 +118,16 @@ function Detail() {
 
       {/* Description Section */}
       <div className={styles.descriptionReservation}>
-        <div className={styles.descriptionContainer}>
-          <h3>About this house</h3>
-          <p className={styles.houseDescription}>{houseData.description}</p>
+        <div className={styles.AboutBook}>
+          <div className={styles.descriptionContainer}>
+            <h3>About this house</h3>
+            <p className={styles.houseDescription}>{houseData.description}</p>
+          </div>
         </div>
-      </div>
-
-      {/* Booking Section */}
-      <div className={styles.bookingSection}>
-        <BookingCard hostId={houseData.creator_id} listingId={houseData.id} />
+        {/* Booking Section */}
+        <div className={styles.bookingSection}>
+          <BookingCard hostId={houseData.creator_id} listingId={houseData.id} />
+        </div>
       </div>
 
       {/* YouTube Video Section */}
