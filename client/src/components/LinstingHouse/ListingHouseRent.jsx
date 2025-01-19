@@ -58,10 +58,17 @@ const ListingHouseRent = () => {
           price={house.price}
           description={house.description}
           specs={[
-            { icon: "bathroom-icon.png", label: `${house.bathroomCount} Bathrooms` },
-            { icon: "bedroom-icon.png", label: `${house.bedroomCount} Bedrooms` },
+            {
+              icon: "bathroom-icon.png",
+              label: `${house.bathroomCount} Bathrooms`,
+            },
+            {
+              icon: "bedroom-icon.png",
+              label: `${house.bedroomCount} Bedrooms`,
+            },
           ]}
           imageUrl={house.listingPhotoPaths[0]}
+          type={"rent"}
         />
       ))}
     </div>

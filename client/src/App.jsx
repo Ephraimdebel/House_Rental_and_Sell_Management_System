@@ -11,6 +11,7 @@ import Footer from "./components/footer/footer";
 import HouseSale from "./components/listingProperty/HouseList";
 import HouseRent from "./components/listingProperty/HouseRent";
 import Detail from "./components/DetailPage/Detail";
+import DetailSale from "./components/DetailPage/DetailSale";
 import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
 import AboutUs from "./components/AboutUs/AboutUs";
@@ -22,6 +23,7 @@ import FilterPage from "./components/filterPage/filterList";
 import FilterList from "./components/filterPage/filterList";
 import ListingHouseSell from "./components/LinstingHouse/ListingHouseSell";
 import ListingHouseRent from "./components/LinstingHouse/ListingHouseRent";
+import AdminDashboard from "./components/AdminDasbord/adminDashbord";
 
 export const AppState = createContext();
 
@@ -87,8 +89,10 @@ function App() {
         <Route path="/listingRent" element={<ListingHouseRent />} />
         <Route path="/filter" element={<FilterList />} />
         <Route path="/house/:id" element={<Detail />} />
-        <Route path="/addproperty" element={<AddHouseForm />} /> 
-        <Route path="*" element={ <Four04 /> } />
+        <Route path="/houseSale/:id" element={<DetailSale />} />
+        <Route path="/addproperty" element={<AddHouseForm />} />
+        <Route path="/adminDashbord" element={<AdminDashboard />} />
+        <Route path="*" element={<Four04 />} />
       </Routes>
       <Footer />
       <ToastContainer

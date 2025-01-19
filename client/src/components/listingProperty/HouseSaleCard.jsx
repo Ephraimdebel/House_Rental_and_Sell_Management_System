@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./HouseCard.module.css"; // Assuming you have this CSS module
 import HouseForSaleData from "./HouseForSaleData"; // Ensure this is correctly imported
 
-const HouseCard = ({
+const HouseSaleCard = ({
   title,
   location,
   price,
@@ -41,4 +41,4 @@ const HouseCard = ({
   );
 };
 
-export default HouseCard;
+export default HouseSaleCard;

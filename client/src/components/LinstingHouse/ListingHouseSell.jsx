@@ -58,6 +58,7 @@ const ListingHouseSell = () => {
             { icon: "bedroom-icon.png", label: `${house.bedroomCount} Bedrooms` },
           ]}
           imageUrl={house.listingPhotoPaths[0]}
+          type={'sale'}
         />
       ))}
     </div>

@@ -13,7 +13,7 @@ function ProductCard({ data }) {
   return (
     <div className={classes.productCard}>
       <img
-        src={data.listingPhotoPaths[1]}
+        src={data.listingPhotoPaths[0]}
         alt={data.location}
         className={classes.productCard__image}
       />

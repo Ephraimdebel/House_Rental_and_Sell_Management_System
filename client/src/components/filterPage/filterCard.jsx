@@ -8,6 +8,7 @@ const FilterCard = ({
   description,
   specs = [], 
   imageUrl,
+  type
 }) => {
   return (
     <div className={classes["filter-card"]}>
@@ -18,12 +19,12 @@ const FilterCard = ({
           <p className={classes["location"]}>{location}</p>
           <h1 className={classes["price"]}>
             {price ? `$${price.toLocaleString()}` : "Price not available"}{" "}
-            <span>For Sale</span>
+            <span>For {type}</span>
           </h1>
           <p className={classes["description"]}>{description}</p>
 
           {/* Specs */}
-          {specs.length > 0 && (
+          {/* {specs.length > 0 && (
             <div className={classes["filter-specs"]}>
               {specs.map((spec, index) => (
                 <div key={index} className={classes["spec"]}>
@@ -32,7 +33,7 @@ const FilterCard = ({
                 </div>
               ))}
             </div>
-          )}
+          )} */}
         </div>
 
         {/* House Image */}
