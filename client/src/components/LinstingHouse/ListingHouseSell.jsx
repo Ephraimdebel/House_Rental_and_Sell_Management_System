@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import FilterCard from "../filterPage/FilterCard";
+import FilterCard from "../filterPage/filterCard";
 import classes from "../filterPage/filter.module.css";
 import NoHouses from "../NoHouse/NoHouses";
 

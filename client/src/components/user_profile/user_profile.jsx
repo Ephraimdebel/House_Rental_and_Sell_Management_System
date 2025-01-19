@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./user_profile.css";
 
 const userData = {
   name: "Abebe Bikila",
-  role: "Renter",
+  role: "Rental", // Change this to "Owner" to test the conditional rendering
   email: "abebe.bikila@example.com",
   phone: "+251 911 123 456",
   address: "123 Addis Ababa, Ethiopia",
@@ -12,8 +13,8 @@ const userData = {
     "789 Piassa, Addis Ababa, Ethiopia",
   ],
   rentalHistory: [
-    "Rental #1 - 01/2022 to 06/2022",
-    "Rental #2 - 07/2022 to 12/2022",
+    `456 Bole Rd, Addis Ababa, Ethiopia - 01/2022 to 06/2022`,
+    `89 Piassa, Addis Ababa, Ethiopia - 01/2022 to 06/2022`,
   ],
 };
 
@@ -42,7 +43,7 @@ const UserProfile = () => {
           <p>
             <strong>Address:</strong> {userData.address}
           </p>
-          <p>
+          {/* <p>
             <strong>Rented Houses:</strong>
           </p>
           <ul>
@@ -57,7 +58,17 @@ const UserProfile = () => {
             {userData.rentalHistory.map((history, index) => (
               <li key={index}>{history}</li>
             ))}
-          </ul>
+          </ul> */}
+        </div>
+        <div className="profile-actions">
+          <Link to="/editprofile" className="btn">
+            Edit Profile
+          </Link>
+          {userData.role === "Owner" && (
+            <Link to="/posthouse" className="btn">
+              Post House
+            </Link>
+          )}
         </div>
       </div>
     </div>

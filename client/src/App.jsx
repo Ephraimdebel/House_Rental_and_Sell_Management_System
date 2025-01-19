@@ -1,10 +1,17 @@
 import React, { createContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
+import EditProfile from "./components/edit_profile/edit_profile";
 import Product from "./components/product/Product";
 import ProductSale from "./components/product/ProductSale";
 import Home from "./pages/Home/Home";
 import UserProfile from "./components/user_profile/user_profile";
+import PostHouse from "./components/post_house/post_house";
 import OwnerProfile from "./components/owner_profile/owner_profile";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
@@ -15,7 +22,7 @@ import DetailSale from "./components/DetailPage/DetailSale";
 import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
 import AboutUs from "./components/AboutUs/AboutUs";
-import { ToastContainer } from "react-toastify"; 
+import { ToastContainer } from "react-toastify";
 import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
 import HouseProfile from "./components/Chat/HostProfile";
@@ -27,12 +34,7 @@ import AdminDashboard from "./components/AdminDasbord/adminDashbord";
 
 export const AppState = createContext();
 
-
-
-
 function App() {
-
-
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -40,8 +42,6 @@ function App() {
   const handleLogout = () => {
     // Remove token and user-related data from localStorage
     localStorage.removeItem("token");
-
-
 
     localStorage.removeItem("username");
     localStorage.removeItem("userid");
@@ -73,7 +73,8 @@ function App() {
 
       checkUser();
     }
-  },[token]);
+  }, [token]);
+  }, [token]);
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
       <Header />
@@ -84,6 +85,8 @@ function App() {
         <Route path="/products" element={<Product />} />
         <Route path="/productsale" element={<ProductSale />} />
         <Route path="/user" element={<UserProfile />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/posthouse" element={<PostHouse />} />
         <Route path="/owner" element={<OwnerProfile />} />
         <Route path="/listingSale" element={<ListingHouseSell />} />
         <Route path="/listingRent" element={<ListingHouseRent />} />

@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
 import BookingCard from "../Booking/BookingCard";
 import ReactPlayer from "react-player";
-import Rating from "@mui/material/Rating"
+import Rating from "@mui/material/Rating";
+import instance from "../../Api/axios";
 
 function Detail() {
   const { id } = useParams();
@@ -20,9 +21,8 @@ function Detail() {
     // Fetch the house details
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5500/api/house/${id}`);
-        const data = await response.json();
-        setHouseData(data.data[0]);
+        const response = await instance.get(`/house/${id}`);
+        setHouseData(response.data.data[0]);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching house data:", error);
@@ -33,12 +33,12 @@ function Detail() {
     // Fetch testimonials
     const fetchTestimonials = async () => {
       try {
-        const response = await fetch(`http://localhost:5500/api/feedback/reviews/${id}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` // Corrected: Move this inside headers
-            }
+        const response = await instance.get(`/feedback/reviews/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         });
-        const data = await response.json();
-        setTestimonials(data.testimonials);
+        setTestimonials(response.data.testimonials); // Fixed: Removed .json()
       } catch (error) {
         console.error("Error fetching testimonials:", error);
       }
@@ -47,20 +47,21 @@ function Detail() {
     fetchData();
     fetchTestimonials();
   }, [id]);
-console.log("testimonials:",testimonials)
+
+  console.log("testimonials:", testimonials);
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setTestimonialForm({ ...testimonialForm, [name]: value });
   };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5500/api/feedback/reviews/${id}`, {
+      const response = await instance.post(`/feedback/reviews/${id}`, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}` // Corrected: Move this inside headers
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Corrected: Move this inside headers
         },
         body: JSON.stringify(testimonialForm),
       });
@@ -75,7 +76,6 @@ console.log("testimonials:",testimonials)
       console.error("Error submitting testimonial:", error);
     }
   };
-  
 
   if (loading) return <p>Loading...</p>;
   if (!houseData) return <p>House not found</p>;
@@ -149,16 +149,11 @@ console.log("testimonials:",testimonials)
             <div key={index} className={styles.testimonial}>
               <p>
                 <strong>{testimonial.reviewerName}</strong>
+                <div className={styles.rating}>
+                  <Rating value={testimonial?.rate} precision={0.1} />
+                  <small>{testimonial?.count}</small>
+                </div>
               </p>
-              <div className={styles.rating}>
-                {/* Ensure the rate is passed as a valid number */}
-                <Rating
-                  value={Number(testimonial?.rating)}
-                  precision={0.1}
-                  readOnly
-                />
-                {/* <small>{testimonial?.count} reviews</small> */}
-              </div>
               <p>{testimonial?.message}</p>
             </div>
           ))
@@ -168,6 +163,18 @@ console.log("testimonials:",testimonials)
 
         <form onSubmit={handleFormSubmit} className={styles.testimonialForm}>
           <h4>Leave a Testimonial</h4>
+
+          {/* Name Field */}
+          <label htmlFor="userName">Your Name:</label>
+          <input
+            id="userName"
+            type="text"
+            name="userName"
+            value={testimonialForm.userName}
+            placeholder="Enter your name"
+            onChange={handleFormChange}
+            required
+          />
 
           {/* Rating Field */}
           <label htmlFor="rating">Rating:</label>

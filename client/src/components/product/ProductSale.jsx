@@ -77,15 +77,15 @@ function Product() {
           Page {currentPage} of {totalPages}
         </span>
         <button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
           disabled={currentPage === totalPages}
         >
           <FaAngleRight />
-
         </button>
       </div>
     </div>
-    
   );
 }
 

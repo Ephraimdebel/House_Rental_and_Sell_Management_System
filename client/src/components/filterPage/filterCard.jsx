@@ -8,7 +8,7 @@ const FilterCard = ({
   location,
   price,
   description,
-  specs = [], 
+  specs = [],
   imageUrl,
   type
 }) => {
@@ -54,7 +54,6 @@ const FilterCard = ({
 };
 
 export default FilterCard;
-
 
 //http://localhost:5500/api/filteredhouse?category=1&city=Addis%20Ababa&bathrooms=4&type=1&minPrice=500&maxPrice=2000
 //http://localhost:5173/filter?city=Addis%20Ababa&bathrooms=3&type=1&category=2&minPrice=100&maxPrice=1000

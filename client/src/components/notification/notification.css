@@ -1,0 +1,61 @@
+/* Styling the notification container */
+#notification-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Each notification message */
+.notification {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* Last message shouldn't have a border-bottom */
+.notification:last-child {
+  border-bottom: none;
+}
+
+/* Date and time styling */
+.notification-date-time {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+/* Message content */
+.notification-message {
+  font-size: 1rem;
+  color: #333;
+}
+.seeDetail {
+  color: white;
+  background-color: #3498db;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  align-items: center;
+  padding: 10px 0;
+}
+.seeDetail:hover {
+  background-color: #346f95;
+  cursor: pointer;
+}
+#notification-container .container {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#notification-container .container:hover {
+  transition: ease-in-out 0.5s;
+  box-shadow: 0 0 10px rgb(211, 209, 209);
+}

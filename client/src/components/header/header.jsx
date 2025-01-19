@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
-import classes from "./header.module.css"; 
+import classes from "./header.module.css";
 import { AppState } from "../../App";
 import { Link } from "react-router-dom";
+import { MdCircleNotifications } from "react-icons/md";
+import { messageLength } from "../notification/notification";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,20 +58,24 @@ const Header = () => {
             </Link>
           </li>
           <li className={classes["menu-item"]}>
-            
-          {token ? (
+            {token ? (
+              <>
                 <button className="button-container" onClick={handleLogout}>
                   LOG OUT
                 </button>
-              ) : (
+              </>
+            ) : (
+              <>
                 <Link to="/login" className={classes.link}>
                   <button className="button-container">SIGN IN</button>
                 </Link>
-              )}
+                <Link to="/notification">
+                  <MdCircleNotifications style={{ fontSize: "54px" }} />
+                  <span color="red">{messageLength}</span>
+                </Link>
+              </>
+            )}
           </li>
-
-
-         
         </ul>
       </nav>
     </header>
