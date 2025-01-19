@@ -82,13 +82,12 @@ function App() {
         <Route path="/owner" element={<OwnerProfile />} />
         <Route path="/listingSale" element={<HouseSale />} />
         <Route path="/listingRent" element={<HouseRent />} />
-        <Route path="/detail" element={<Detail />} />
         {/* Updated Route */}
-        <Route path="/detail" element={<Detail />} />
-        <Route path="/addpropery" element={<AddHouseForm />} />{" "}
-        <Route path="/houseProfile" element={<HouseProfile />} />{" "}
-        <Route path="/filter" element={<FilterPage />} />{" "}
-        <Route path="*" element={<Four04 />} />
+<Route path="/house/:id" element={<Detail />} />
+        <Route path="/addproperty" element={<AddHouseForm />} /> {/* Updated Route */}
+        <Route path="*" element={ 
+              <Four04 />
+              } />
       </Routes>
       <Footer />
       <ToastContainer

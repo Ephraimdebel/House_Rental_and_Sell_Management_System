@@ -17,14 +17,21 @@ const AddHouseForm = () => {
     title: '',
     description: '',
     price: '',
-    longitude: '',
-    latitude: '',
     videoUrl: '',
     photos: [],
   });
 
-  const categoryOptions = ['Apartment', 'House', 'Condo', 'Villa']; // Example options
-  const typeOptions = ['Rental', 'Sale']; // Example options
+  const categoryOptions = [
+    { id: 1, name: 'Apartment' },
+    { id: 2, name: 'Condo' },
+    { id: 3, name: 'Villa' },
+    { id: 4, name: 'House' },
+  ];
+
+  const typeOptions = [
+    { id: 1, name: 'Sale' },
+    { id: 2, name: 'Rental' },
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,23 +42,36 @@ const AddHouseForm = () => {
   };
 
   const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 5) {
+      alert('You can upload a maximum of 5 photos.');
+      return;
+    }
     setFormData((prevState) => ({
       ...prevState,
-      photos: Array.from(e.target.files),
+      photos: files,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const mappedData = {
+      ...formData,
+      category: parseInt(formData.category),
+      type: parseInt(formData.type),
+    };
+
     const form = new FormData();
-    for (const key in formData) {
+    for (const key in mappedData) {
       if (key === 'photos') {
-        formData.photos.forEach((photo) => form.append('photos', photo));
+        mappedData.photos.forEach((photo) => form.append('photos', photo));
       } else {
-        form.append(key, formData[key]);
+        form.append(key, mappedData[key]);
       }
     }
+
+    const token = localStorage.getItem('token');
 
     try {
       const response = await axios.post(
@@ -60,12 +80,14 @@ const AddHouseForm = () => {
         {
           headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       alert(response.data.message);
+      window.location.reload();
     } catch (err) {
-      alert('Error: ' + err.response?.data?.message || err.message);
+      alert('Error: ' + (err.response?.data?.message || err.message));
     }
   };
 
@@ -83,24 +105,20 @@ const AddHouseForm = () => {
               onChange={handleChange}
             >
               <option value="">Select Category</option>
-              {categoryOptions.map((option, idx) => (
-                <option key={idx} value={option}>
-                  {option}
+              {categoryOptions.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
                 </option>
               ))}
             </select>
           </div>
           <div className={styles.field}>
             <label>Type</label>
-            <select
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-            >
+            <select name="type" value={formData.type} onChange={handleChange}>
               <option value="">Select Type</option>
-              {typeOptions.map((option, idx) => (
-                <option key={idx} value={option}>
-                  {option}
+              {typeOptions.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
                 </option>
               ))}
             </select>
@@ -212,7 +230,7 @@ const AddHouseForm = () => {
           </div>
         </div>
 
-        {/* Price, Coordinates, and Video */}
+        {/* Price and Video */}
         <div className={styles.row}>
           <div className={styles.field}>
             <label>Price</label>
@@ -223,26 +241,6 @@ const AddHouseForm = () => {
               onChange={handleChange}
             />
           </div>
-          <div className={styles.field}>
-            <label>Longitude</label>
-            <input
-              type="text"
-              name="longitude"
-              value={formData.longitude}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label>Latitude</label>
-            <input
-              type="text"
-              name="latitude"
-              value={formData.latitude}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className={styles.row}>
           <div className={styles.field}>
             <label>Video URL</label>
             <input

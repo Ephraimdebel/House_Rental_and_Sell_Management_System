@@ -3,73 +3,6 @@ const { StatusCodes } = require("http-status-codes");
 const { BASE_URL } = require("../../config/index");
 
 
-const getHouse = async (req, res) => {
-  try {
-    // Fetch all houses from the database
-    const houses = await query("SELECT * FROM House");
-
-    // Handle case where no houses are found
-    if (houses.length === 0) {
-      return res.status(StatusCodes.NOT_FOUND).json({
-        message: "No houses found",
-      });
-    }
-
-    // Respond with the list of houses
-    res.status(StatusCodes.OK).json(houses);
-  } catch (error) {
-    console.error("Error while fetching houses:", error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message: "Server error while retrieving houses",
-      error: error.message,
-    });
-  }
-};
-
-// const addHouse = async (req, res) => {
-//   const { location, imgURL, price, details, ownerId } = req.body;
-
-//   // Validate required fields
-//   if (!location || !price || !details || !ownerId) {
-//     return res.status(StatusCodes.BAD_REQUEST).json({
-//       message:
-//         "All fields (location, imgURL, price, details, ownerId) are required",
-//     });
-//   }
-
-//   try {
-//     // Insert house details into the database
-//     const result = await query(
-//       "INSERT INTO House (location, price, details, ownerId) VALUES (?, ?, ?,  ?)",
-//       [location, price, details, ownerId]
-//     );
-
-//     // Fetch the newly added house details
-//     const houseResult = await query("SELECT * FROM House WHERE houseId = ?", [
-//       result.insertId,
-//     ]);
-
-//     // Check if the house exists
-//     if (!houseResult || houseResult.length === 0) {
-//       return res.status(StatusCodes.NOT_FOUND).json({
-//         message: "House was added but could not retrieve its details",
-//       });
-//     }
-
-//     // Send the response with the house details
-//     res.status(StatusCodes.CREATED).json({
-//       ...houseResult[0],
-//       message: "House added successfully",
-//     });
-//   } catch (error) {
-//     console.error("Error while adding house:", error);
-//     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-//       message: "Server error while adding house",
-//       error: error.message,
-//     });
-//   }
-// };
-
 
 const dbConnection = require("../../config/db");
 
@@ -91,12 +24,11 @@ const dbConnection = require("../../config/db");
       title,
       description,
       price,
-      longitude,
-      latitude,
       videoUrl,
     } = req.body;
 
-    const listingPhotos = req.files;
+    const photos = req.files;
+    const listingPhotos = photos;
 
     // Check if files are uploaded
     if (!listingPhotos || listingPhotos.length === 0) {
@@ -117,7 +49,7 @@ const dbConnection = require("../../config/db");
     `;
 
     const values = [
-      1, // Creator ID (hardcoded for testing)
+      req.user.userid, // Creator ID (hardcoded for testing)
       category,
       type,
       streetAddress,
@@ -132,8 +64,8 @@ const dbConnection = require("../../config/db");
       title,
       description,
       price,
-      longitude,
-      latitude,
+       98.7,
+       98.7,
       videoUrl || null,
       isAdmin ? 1 : 0,
     ];
@@ -164,6 +96,7 @@ const dbConnection = require("../../config/db");
       newListing: result,
     });
   } catch (err) {
+    console.error('Error in creating listing:', err);
     res.status(500).json({ message: 'Error in creating listing', error: err.message });
   }
 };
@@ -263,6 +196,68 @@ const getHouseDetails = async (req, res) => {
 
 
 
+const getFilteredHouses = async (req, res) => {
+  try {
+    // Extract query parameters
+    const { category, city, bathrooms, type, minPrice, maxPrice } = req.query;
+
+    console.log('Received filters:', req.query); // Debug incoming query parameters
+
+    // Base query
+    let query = `SELECT * FROM listings WHERE 1=1`;
+    const queryParams = [];
+
+    // Dynamically add filters
+    if (category) {
+      query += ` AND category_id = ?`;
+      queryParams.push(category);
+    }
+
+    if (city) {
+      query += ` AND LOWER(city) = LOWER(?)`; // Case-insensitive comparison
+      queryParams.push(city.trim()); // Trim spaces from input
+    }
+
+    if (bathrooms) {
+      query += ` AND bathroomCount >= ?`;
+      queryParams.push(bathrooms);
+    }
+
+    if (type) {
+      query += ` AND type_id = ?`;
+      queryParams.push(type);
+    }
+
+    if (minPrice && maxPrice) {
+      query += ` AND price BETWEEN ? AND ?`;
+      queryParams.push(minPrice, maxPrice);
+    } else if (minPrice) {
+      query += ` AND price >= ?`;
+      queryParams.push(minPrice);
+    } else if (maxPrice) {
+      query += ` AND price <= ?`;
+      queryParams.push(maxPrice);
+    }
+
+    console.log('Generated Query:', query); // Debug the SQL query
+    console.log('Query Parameters:', queryParams); // Debug query parameters
+
+    // Execute query
+    const [filteredHouses] = await dbConnection.query(query, queryParams);
+
+    res.status(200).json({
+      message: 'Filtered houses retrieved successfully',
+      houses: filteredHouses,
+    });
+  } catch (error) {
+    console.error('Error fetching filtered houses:', error.message);
+    res.status(500).json({
+      message: 'Error fetching filtered houses',
+      error: error.message,
+    });
+  }
+};
 
 
-module.exports = { getHouse, addHouse, getAllListings ,getHouseDetails,getListingsByType};
+
+module.exports = { addHouse, getAllListings ,getHouseDetails,getListingsByType,getFilteredHouses};
