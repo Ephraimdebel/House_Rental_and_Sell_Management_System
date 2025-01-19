@@ -1,7 +1,9 @@
 import React from "react";
 import classes from "./filter.module.css";
+import { Link } from "react-router-dom";
 
 const FilterCard = ({
+  id,
   title,
   location,
   price,
@@ -11,6 +13,7 @@ const FilterCard = ({
   type
 }) => {
   return (
+    <Link to={`/house/${id}`}>
     <div className={classes["filter-card"]}>
       <div className={classes["filter-card-content"]}>
         {/* House Details */}
@@ -46,6 +49,7 @@ const FilterCard = ({
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
