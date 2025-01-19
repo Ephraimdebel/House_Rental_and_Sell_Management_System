@@ -103,7 +103,7 @@ async function login(req, res) {
 
     const username = user[0].userName
     const userid = user[0].id
-    const token =jwt.sign({username,userid},process.env.JWT_SECRET,{expiresIn:"1h"})
+    const token =jwt.sign({username,userid},process.env.JWT_SECRET,{expiresIn:"1d"})
 
     return res.status(StatusCodes.OK).json({msg:"login success",token,username,userid})
 
