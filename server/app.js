@@ -38,7 +38,8 @@ app.use("/api", purchaseRoute);
 const feedbackRoute = require("./app/routes/feedback.routes");
 app.use("/api/feedback", feedbackRoute);
 
-
+const notificationRoute = require("./app/routes/notifications.routes");
+app.use("/api/notifications", notificationRoute);
 async function start() {
   try {
     // const result = await dbConnection.execute("select 'test' ");
