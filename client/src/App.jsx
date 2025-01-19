@@ -19,6 +19,7 @@ import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
 import HouseProfile from "./components/Chat/HostProfile";
 import FilterPage from "./components/filterPage/filterList";
+import FilterList from "./components/filterPage/filterList";
 
 export const AppState = createContext();
 
@@ -82,6 +83,7 @@ function App() {
         <Route path="/owner" element={<OwnerProfile />} />
         <Route path="/listingSale" element={<HouseSale />} />
         <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/filter" element={<FilterList />} />
         {/* Updated Route */}
 <Route path="/house/:id" element={<Detail />} />
         <Route path="/addproperty" element={<AddHouseForm />} /> {/* Updated Route */}
