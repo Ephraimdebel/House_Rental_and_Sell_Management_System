@@ -1,10 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
+import EditProfile from "./components/edit_profile/edit_profile";
 import Product from "./components/product/Product";
 import ProductSale from "./components/product/ProductSale";
 import Home from "./pages/Home/Home";
 import UserProfile from "./components/user_profile/user_profile";
+import PostHouse from "./components/post_house/post_house";
 import OwnerProfile from "./components/owner_profile/owner_profile";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
@@ -80,6 +82,8 @@ function App() {
         <Route path="/products" element={<Product />} />
         <Route path="/productsale" element={<ProductSale />} />
         <Route path="/user" element={<UserProfile />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/posthouse" element={<PostHouse />} />
         <Route path="/owner" element={<OwnerProfile />} />
         <Route path="/listingSale" element={<HouseSale />} />
         <Route path="/listingRent" element={<HouseRent />} />
@@ -90,6 +94,7 @@ function App() {
         <Route path="*" element={ 
               <Four04 />
               } />
+        <Route path="/editprofile" element={<EditProfile />} />
       </Routes>
       <Footer />
       <ToastContainer
