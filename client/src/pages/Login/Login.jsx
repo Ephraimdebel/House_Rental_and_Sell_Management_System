@@ -2,11 +2,11 @@
 
 import React, { useState, useContext, useEffect } from "react";
 import axios from "../../Api/axios";
-import "./Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppState } from "../../App"; // Assuming you have a context for auth state
 import { toast } from "react-toastify"; // Import toast
-import im1 from "../../assets/image/loginImage.jpg";
+import im1 from "../../assets/image/loginimage.jpg";
+import classes from "./Login.module.css";
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true); // Tracks current form (Login or Signup)
   const [formData, setFormData] = useState({
@@ -162,23 +162,23 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
-      <div className="outer-container">
+    <div className={classes.login_page}>
+      <div className={classes.outer_container}>
         {/* Login/Signup Form Container */}
-        <div className="login-container">
+        <div className={classes.login_container}>
           <h2>{isLogin ? "Login to your account" : "Create a new account"}</h2>
-          <div className="new-account">
+          <div className={classes.new_account}>
             {isLogin ? (
               <>
                 Don't have an account?{" "}
-                <button className="toggle-button" onClick={toggleForm}>
+                <button className={classes.toggle_button} onClick={toggleForm}>
                   Create a new account
                 </button>
               </>
             ) : (
               <>
                 Already have an account?{" "}
-                <button className="toggle-button" onClick={toggleForm}>
+                <button className={classes.toggle_button} onClick={toggleForm}>
                   Login
                 </button>
               </>
@@ -199,7 +199,7 @@ const Login = () => {
             {/* Conditionally render additional fields for Signup */}
             {!isLogin && (
               <>
-                <div className="name-container">
+                <div className={classes.name_container}>
                   <input
                     type="text"
                     id="firstName"
@@ -234,7 +234,7 @@ const Login = () => {
             )}
 
             {/* Password Field */}
-            <div className="password-container">
+            <div className={classes.password_container}>
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
@@ -247,7 +247,7 @@ const Login = () => {
               />
               <button
                 type="button"
-                className="eye-button"
+                className={classes.eye_button}
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
@@ -256,7 +256,7 @@ const Login = () => {
             </div>
 
             {/* Submit Button */}
-            <button className="login-button" type="submit" disabled={loading}>
+            <button className={classes.login_button} type="submit" disabled={loading}>
               {loading
                 ? isLogin
                   ? "Logging in..."
@@ -271,13 +271,13 @@ const Login = () => {
         </div>
 
         {/* Accompanying Text Container */}
-        <div className="p-container">
+        <div className={classes.p_container}>
           <a href="/about">About</a>
           <h1>Infinity Houses</h1>
-          <div className="image-container">
+          <div className={classes.image_container}>
             <img src={im1} alt=""/>
             <a href="/how-it-works">
-              <button className="last-button">How it works</button>
+              <button className={classes.last_button}>How it works</button>
             </a>
           </div>
         </div>

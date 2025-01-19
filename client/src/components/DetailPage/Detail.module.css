@@ -115,9 +115,8 @@ h3 {
   font-size: 16px;
   color: #333;
 }
-/* ===================== */
-/* Booking Details Styles */
-/* ===================== */
+
+/* Booking Details */
 .bookingDetails {
   flex: 1;
   padding: 10px;
@@ -126,6 +125,18 @@ h3 {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.bookingPrice{
+  display: flex;
+  gap: 200px;
+}
+.RentalFee{
+  display: flex;
+  gap: 220px;
+}
+.totalBeforeTax{
+  display: flex;
+  gap: 140px;
+}
 .bookingAmount,
 .bookingSummary {
   font-size: 16px;
@@ -140,26 +151,7 @@ h3 {
   margin-top: 20px;
 }
 
-.bookingPrice {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.RentalFee {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-.totalBeforeTax {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
+/* Reserve Button */
 .reserveButton {
   background: linear-gradient(to right, #009DDE, #009DDE);
   color: white;
@@ -171,7 +163,8 @@ h3 {
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .reserveButton:hover {
@@ -205,18 +198,17 @@ p {
   color: #333;
 }
 .bookingSection {
-  position: sticky; 
-  right: 20px;
-  top: calc(100px + 250px); 
-  flex-direction: column;
+  flex-direction: column; 
   justify-content: space-between;
   padding: 30px;
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  width: 40%; 
+  margin-top: 40px;
+  width: 30%; 
+  position: sticky;
+  top: 100px;
 }
-
 
 .guestContainer {
   display: flex;
@@ -232,9 +224,7 @@ p {
 }
 
 .date {
-  margin-left: 5px;
-  margin-bottom: 20px;
-  margin-right: 5px;
+  margin: 0px 10px 20px 10px;
 }
 
 .date p {
@@ -248,82 +238,67 @@ p {
   font-size: 14px;
   color: #333;
 }
-/* User Section */
-.userContainer {
-  padding: 20px;
+
+
+.bookingSection{
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 40px;
+  width: 30%;
+  position: sticky;
+  top: 100px;
+margin-left: auto;}
+
+
+.testimonialSection {
+  margin-top: 2rem;
+  padding: 1rem;
+  width: 70%;
+  border-top: 1px solid #ddd;
+}
+
+.testimonial {
+  margin-bottom: 1rem;
+  padding: 1rem;
   background-color: #f9f9f9;
   border-radius: 8px;
-  margin-top: 20px;
 }
 
-.userContainer h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #333;
+.testimonialForm {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.userLabel {
-  font-size: 1rem;
-  margin-right: 10px;
-  color: #555;
-}
-
-.userInput {
-  padding: 8px;
-  font-size: 1rem;
-  width: 250px;
+.testimonialForm input,
+.testimonialForm select,
+.testimonialForm textarea {
+  width: 100%;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.userInput:focus {
-  border-color: #007bff;
-  outline: none;
+.testimonialForm button {
+  padding: 0.5rem 1rem;
+  background-color: #275060;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.greeting {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #333;
+.testimonialForm button:hover {
+  background-color: #1e404d;
 }
 
-.greeting strong {
-  font-weight: bold;
-}
-
-/* What this place offers Section */
-.amenitiesContainer {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-.amenitiesContainer h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.amenitiesList {
-  display: flex;
-  gap: 20px;
-  margin-top: 10px;
-}
-
-.amenity {
+.rating {
   display: flex;
   align-items: center;
-  gap: 5px;
+  padding: 10px 0px;
 }
-
-.amenityIcon {
-  font-size: 1.5rem;
-  color: #007bff;
-}
-
-.amenity p {
-  font-size: 1rem;
-  color: #555;
-}
-
