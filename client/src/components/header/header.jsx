@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./header.module.css"; 
+import { AppState } from "../../App";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const { handleLogout, user } = useContext(AppState);
 
   return (
     <header className={classes.header}>
@@ -21,40 +25,51 @@ const Header = () => {
           }`}
         >
           <li className={classes["menu-item"]}>
-            <a href="/" className={classes.link}>
+            <Link to="/" className={classes.link}>
               Home
-            </a>
+            </Link>
           </li>
           <li className={classes["menu-item"]}>
-            <a href="/listingSale" className={classes.link}>
+            <Link to="/listingSale" className={classes.link}>
               Sale
-            </a>
+            </Link>
           </li>
           <li className={classes["menu-item"]}>
-            <a href="/listingRent" className={classes.link}>
+            <Link to="/listingRent" className={classes.link}>
               Rentals
-            </a>
+            </Link>
           </li>
           <li className={classes["menu-item"]}>
-            <a href="/about" className={classes.link}>
+            <Link to="/about" className={classes.link}>
               About Us
-            </a>
+            </Link>
           </li>
           <li className={classes["menu-item"]}>
-            <a href="/contact" className={classes.link}>
+            <Link to="/contact" className={classes.link}>
               Contact Us
-            </a>
+            </Link>
           </li>
+
           <li className={classes["menu-item"]}>
-            <a href="/login" className={classes.link}>
-              Login
-            </a>
-          </li>
-          <li className={classes["menu-item"]}>
-            <a href="/user" className={classes.link}>
+            <Link to="/user" className={classes.link}>
               Profile
-            </a>
+            </Link>
           </li>
+          <li className={classes["menu-item"]}>
+            
+          {token ? (
+                <button className="button-container" onClick={handleLogout}>
+                  LOG OUT
+                </button>
+              ) : (
+                <Link to="/login" className={classes.link}>
+                  <button className="button-container">SIGN IN</button>
+                </Link>
+              )}
+          </li>
+
+
+         
         </ul>
       </nav>
     </header>

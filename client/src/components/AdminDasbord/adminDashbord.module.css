@@ -1,0 +1,30 @@
+.sidebar {
+  background-color: #3498DB; /* Blue color */
+  height: 100vh;
+  width: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuItem {
+  margin-bottom: 15px;
+}
+
+.menuItem a {
+  text-decoration: none;
+  color: #ffffff; /* White text */
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menuItem a:hover {
+  color: #ffd700; /* Gold color on hover */
+}

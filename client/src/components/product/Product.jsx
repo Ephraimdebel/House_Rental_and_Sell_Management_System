@@ -2,31 +2,39 @@ import React, { useEffect, useState } from "react";
 import breakingLine from "../../assets/heroImage/breakingLine.png";
 import ProductCard from "./ProductCard";
 import classes from "./Product.module.css";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 function Product() {
   // State to store the fetched data
   const [productData, setProductData] = useState([]);
-  
-  // Function to fetch data from the backend
-  const fetchProductData = async () => {
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Function to fetch data from the backend with pagination
+  const fetchProductData = async (page = 1) => {
+    setLoading(true); // Set loading to true when fetching
     try {
-      const response = await fetch("http://localhost:5500/api/housetype?type_id=1");
+      const response = await fetch(
+        `http://localhost:5500/api/housetype?type_id=2&page=${page}&limit=6`
+      );
       const data = await response.json();
-      console.log(data)
+      console.log(data);
+
       setProductData(data.data); // Store the data in state
-      // if (data.message === "Listings with type_id 2 retrieved successfully") {
-      // } else {
-      //   console.error("Error fetching data");
-      // }
+      setCurrentPage(data.currentPage); // Set the current page
+      setTotalPages(data.totalPages); // Set the total pages
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error:", error);
+      setLoading(false); // Set loading to false in case of error
     }
-  }
+  };
 
-  // Fetch data when the component mounts
+  // Fetch data when the component mounts or page changes
   useEffect(() => {
-    fetchProductData();
-  }, []);
+    fetchProductData(currentPage);
+  }, [currentPage]);
 
   return (
     <div className={classes.product__container}>
@@ -48,13 +56,34 @@ function Product() {
       <hr className={classes.breakLine} />
 
       <div className={classes.product__grid}>
-        {productData?.length > 0 ? (
-          productData?.map((info) => (
-            <ProductCard key={info.id} data={info} />
-          ))
-        ) : (
+        {loading ? (
           <p>Loading...</p>
+        ) : productData.length > 0 ? (
+          productData.map((info) => <ProductCard key={info.id} data={info} />)
+        ) : (
+          <p>No properties found.</p>
         )}
+      </div>
+
+      {/* Pagination Controls */}
+      <div className={classes.pagination}>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+                    <FaAngleLeft />
+          
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+                    <FaAngleRight />
+          
+        </button>
       </div>
     </div>
     

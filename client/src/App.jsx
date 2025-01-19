@@ -21,6 +21,9 @@ import AddHouseForm from "./components/AddProperty/AddProperty ";
 import HouseProfile from "./components/Chat/HostProfile";
 import FilterPage from "./components/filterPage/filterList";
 import FilterList from "./components/filterPage/filterList";
+import ListingHouseSell from "./components/LinstingHouse/ListingHouseSell";
+import ListingHouseRent from "./components/LinstingHouse/ListingHouseRent";
+import AdminDashboard from "./components/AdminDasbord/adminDashbord";
 
 export const AppState = createContext();
 
@@ -82,14 +85,13 @@ function App() {
         <Route path="/productsale" element={<ProductSale />} />
         <Route path="/user" element={<UserProfile />} />
         <Route path="/owner" element={<OwnerProfile />} />
-        <Route path="/listingSale" element={<HouseSale />} />
-        <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/listingSale" element={<ListingHouseSell />} />
+        <Route path="/listingRent" element={<ListingHouseRent />} />
         <Route path="/filter" element={<FilterList />} />
-        {/* Updated Route */}
         <Route path="/house/:id" element={<Detail />} />
         <Route path="/houseSale/:id" element={<DetailSale />} />
-        <Route path="/addproperty" element={<AddHouseForm />} />{" "}
-        {/* Updated Route */}
+        <Route path="/addproperty" element={<AddHouseForm />} />
+        <Route path="/adminDashbord" element={<AdminDashboard />} />
         <Route path="*" element={<Four04 />} />
       </Routes>
       <Footer />
