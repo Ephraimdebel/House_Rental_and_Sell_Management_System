@@ -131,26 +131,40 @@ const getAllListings = async (req, res) => {
 
 
 const getListingsByType = async (req, res) => {
-  console.log("Fetching listings by type...", req.query);
+  console.log("Fetching listings by type with pagination...", req.query);
+
   try {
-    // Get the type_id from query parameters
-    const { type_id } = req.query;
+    // Get the type_id, page, and limit from query parameters
+    const { type_id, page = 1, limit = 6 } = req.query;
 
     // Check if type_id is provided
     if (!type_id) {
       return res.status(400).json({ message: "type_id is required" });
     }
 
-    // Query to fetch listings by type_id
-    const query = `SELECT * FROM listings WHERE type_id = ?`;
+    // Calculate the offset based on page and limit
+    const offset = (page - 1) * limit;
 
-    // Execute the query with the provided type_id
-    const results = await dbConnection.query(query, [type_id]);
+    // Query to fetch listings by type_id with pagination (limit and offset)
+    const query = `SELECT * FROM listings WHERE type_id = ? LIMIT ? OFFSET ?`;
 
-    // Return the results
+    // Execute the query with the provided type_id, limit, and offset
+    const results = await dbConnection.query(query, [type_id, Number(limit), Number(offset)]);
+
+    // Query to count total number of listings for the given type_id (for pagination purposes)
+    const countQuery = `SELECT COUNT(*) AS total FROM listings WHERE type_id = ?`;
+    const totalResults = await dbConnection.query(countQuery, [type_id]);
+
+    const totalRecords = totalResults[0][0].total;
+    const totalPages = Math.ceil(totalRecords / limit);
+
+    // Return the paginated results
     res.status(200).json({
       message: `Listings with type_id ${type_id} retrieved successfully`,
       data: results[0], // Use results[0] for mysql2's promise API
+      currentPage: Number(page),
+      totalPages: totalPages,
+      totalRecords: totalRecords,
     });
   } catch (err) {
     console.error("Error fetching listings by type:", err);
