@@ -137,7 +137,46 @@ const updateBookingStatus = async (req, res) => {
     }
 };
 
+const getHostBookings = async (req, res) => {
+  try {
+    const hostId = req.user.userid; // Assuming req.user contains the logged-in host's ID
+
+    if (!hostId) {
+      return res.status(400).json({ message: "Host ID is required" });
+    }
+
+    // Query to fetch bookings for the host
+    const query = `
+      SELECT 
+        b.id AS booking_id,
+        u.userName AS customer_name,
+        l.title AS listing_title,
+        b.startDate,
+        b.endDate,
+        b.totalPrice,
+        b.status
+      FROM Bookings b
+      JOIN Users u ON b.customer_id = u.id
+      JOIN Listings l ON b.listing_id = l.id
+      WHERE b.host_id = ?
+      ORDER BY b.createdAt DESC
+    `;
+
+    // Execute the query
+    const [bookings] = await dbConnection.query(query, [hostId]);
+
+    // Return the bookings
+    res.status(200).json({
+      message: "Bookings retrieved successfully",
+      data: bookings,
+    });
+  } catch (err) {
+    console.error("Error fetching bookings:", err);
+    res.status(500).json({ message: "Failed to fetch bookings", error: err.message });
+  }
+};
+
 
 module.exports = {
-  createBooking,updateBookingStatus
+  createBooking,updateBookingStatus,getHostBookings
 };
