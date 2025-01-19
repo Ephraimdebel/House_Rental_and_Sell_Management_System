@@ -1,0 +1,200 @@
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Overall Container */
+.about-us-container {
+  padding: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-image: url('https://via.placeholder.com/1200x600/3498db/ffffff?text=Beautiful+House');
+  background-size: cover;
+  background-position: center;
+  color: #34495e;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+}
+
+/* Mission Section */
+.mission-section {
+  margin: 20px;
+  text-align: center;
+}
+
+.mission-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #34495e;
+}
+
+.mission-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Mission Items */
+.mission-item {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  animation: fadeInFromSides 1s forwards;
+}
+
+.mission-item:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.mission-item:nth-child(2) {
+  animation-delay: 1s;
+}
+
+/* Mission Top Section */
+.top-section {
+  flex-direction: row;
+}
+
+.mission-img-left,
+.mission-img-right {
+  margin: 60px;
+  width: 600px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.mission-img-left:hover,
+.mission-img-right:hover {
+  transform: scale(1.03);
+}
+
+.mission-text-left,
+.mission-text-right {
+  margin: 60px;
+  flex: 2;
+  font-size: 1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Mission Bottom Section */
+.bottom-section {
+  flex-direction: row-reverse;
+}
+
+/* Team Section */
+.team-section {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.team-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #34495e;
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  gap: 75px;
+  flex-wrap: wrap;
+}
+
+.team-member-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.team-member-card:hover {
+  transform: translateY(-10px);
+}
+
+.team-member-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.team-member-card h3 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin: 10px 0;
+}
+
+.team-member-card p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+/* Contact Section */
+.contact-section {
+  margin: 60px 0;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+  margin: 0 auto;
+  max-width: 600px;
+  color: #7f8c8d;
+}
+
+/* Buttons */
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transition: background-color 0.3s ease;
+}
+
+/* Animations */
+@keyframes fadeInFromSides {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
