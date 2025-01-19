@@ -208,10 +208,41 @@ async function getAllUsers(req, res) {
   }
 }
 
+async function deleteUser(req, res) {
+  const { id } = req.params;
+
+  try {
+    // Check if the user exists
+    const [user] = await dbConnection.query(
+      "SELECT id FROM Users WHERE id = ?",
+      [id]
+    );
+
+    if (user.length === 0) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "User not found" });
+    }
+
+    // Delete the user
+    await dbConnection.query("DELETE FROM Users WHERE id = ?", [id]);
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error.message);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Something went wrong, please try again later" });
+  }
+}
+
+
 async function checkUser(req, res) {
   const username = req.user.username;
   const userid = req.user.userid;
   res.status(StatusCodes.OK).json({ message: "valid user", username, userid });
 }
 
-module.exports = { register, login, checkUser ,updateUserRoleToHost, updateUserRoleToGuest,getAllUsers};
+module.exports = { register, login, checkUser ,updateUserRoleToHost, updateUserRoleToGuest,getAllUsers,deleteUser};
