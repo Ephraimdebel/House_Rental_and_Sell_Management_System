@@ -124,12 +124,12 @@ console.log("testimonials:",testimonials)
             <p className={styles.houseDescription}>{houseData.description}</p>
           </div>
         </div>
-
         {/* Booking Section */}
         <div className={styles.bookingSection}>
           <BookingCard hostId={houseData.creator_id} listingId={houseData.id} />
         </div>
       </div>
+
       {/* YouTube Video Section */}
       <div className={styles.videoSection}>
         <h3>Take a Tour</h3>
