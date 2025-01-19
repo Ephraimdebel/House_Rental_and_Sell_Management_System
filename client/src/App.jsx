@@ -26,6 +26,7 @@ import ListingHouseRent from "./components/LinstingHouse/ListingHouseRent";
 import AdminDashboard from "./components/AdminDasbord/adminDashbord";
 import AllUsers from "./components/UserTable.jsx/userTable";
 import AllProperties from "./components/AllProperties/allProperties";
+import DisplayBooking from "./components/OwnerDashBord/DisplayBooking";
 
 export const AppState = createContext();
 
@@ -96,6 +97,7 @@ function App() {
         <Route path="/adminDashbord" element={<AdminDashboard />} />
         <Route path="/allusers" element={<AllUsers />} />
         <Route path="/allproperties" element={<AllProperties />} />
+        <Route path="/displaybooking" element={<DisplayBooking />} />
 
         <Route path="*" element={<Four04 />} />
       </Routes>

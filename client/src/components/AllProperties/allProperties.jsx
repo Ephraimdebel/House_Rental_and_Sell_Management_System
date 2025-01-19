@@ -7,42 +7,78 @@ const AllProperties = () => {
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
 
-  // Fetch all users from the database
   useEffect(() => {
-    const fetchUsers = async () => {
+    let isMounted = true; // Track component mount status
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    const fetchProperties = async () => {
       try {
         const response = await axios.get("http://localhost:5500/api/houses", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          signal: signal, // Attach the signal to the request
         });
-        setProperties(response.data); 
-        setLoading(false);
+
+        // Ensure the component is still mounted before calling setState
+        if (isMounted) {
+          setProperties(response?.data?.data || []); // Ensure response.data exists and map to the correct data path
+          setLoading(false);
+        }
       } catch (error) {
-        console.error("Error fetching users:", error);
+        if (error.name === "AbortError") {
+          // Handle the case when the request is aborted
+          console.log("Request was aborted");
+        } else {
+          console.error("Error fetching properties:", error);
+        }
         setLoading(false);
       }
     };
 
-    fetchUsers();
-  }, [token]); // Depend on token to refetch if it changes
+    fetchProperties();
 
-  const deleteProperty = (id) => {
-    // DELETE request to remove the property
-    axios
-      .delete(`http://localhost:5500/api/houses/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        // After deleting, remove the property from the UI
-        setProperties(
-          properties.filter((property) => property.property_id !== id)
+    // Cleanup function to cancel the request if component unmounts
+    return () => {
+      isMounted = false; // Mark the component as unmounted
+      abortController.abort();
+    };
+  }, [token]);
+
+  // Handle delete property
+  const handleDelete = async (propertyId) => {
+    if (window.confirm("Are you sure you want to delete this property?")) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:5500/api/house/${propertyId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-      })
-      .catch((error) => console.error("Error deleting property:", error));
+
+        if (response.status === 200) {
+          setProperties((prevProperties) =>
+            prevProperties.filter(
+              (property) => property.id !== propertyId // Adjust propertyId to the correct field (e.g., `id`)
+            )
+          );
+        } else {
+          console.error(
+            "Failed to delete property, status code:",
+            response.status
+          );
+        }
+      } catch (error) {
+        console.error("Error deleting property:", error);
+      }
+    }
   };
 
   if (loading) {
-    return <div>Loading properties...</div>; // Show loading message
+    return <h1>Loading properties...</h1>;
   }
 
   return (
@@ -62,31 +98,32 @@ const AllProperties = () => {
           </tr>
         </thead>
         <tbody>
-          {properties.map((property) => (
-            <tr key={property.property_id}>
-              <td>{property.property_id}</td>
-              <td>{property.creator_name}</td>
-              <td>{property.title}</td>
-              <td>{property.type}</td>
-              <td>{property.city}</td>
-              <td>{new Date(property.created_at).toLocaleDateString()}</td>
-              <td>{property.category}</td>
-              <td>
-                <button
-                  style={{
-                    backgroundColor: "#E74C3C",
-                    color: "white",
-                    border: "none",
-                    padding: "5px 10px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => deleteProperty(property.property_id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {Array.isArray(properties) &&
+            properties.map((property) => (
+              <tr key={property.id}>
+                <td>{property.id}</td>
+                <td>{property.creator_name}</td>
+                <td>{property.title}</td>
+                <td>{property.type}</td>
+                <td>{property.city}</td>
+                <td>{new Date(property.createdAt).toLocaleDateString()}</td>
+                <td>{property.category}</td>
+                <td>
+                  <button
+                    style={{
+                      backgroundColor: "#E74C3C",
+                      color: "white",
+                      border: "none",
+                      padding: "5px 10px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleDelete(property.id)} // Adjust propertyId to the correct field (e.g., `id`)
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
