@@ -1,5 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
 import EditProfile from "./components/edit_profile/edit_profile";
 import Product from "./components/product/Product";
@@ -25,12 +30,7 @@ import FilterList from "./components/filterPage/filterList";
 
 export const AppState = createContext();
 
-
-
-
 function App() {
-
-
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -38,8 +38,6 @@ function App() {
   const handleLogout = () => {
     // Remove token and user-related data from localStorage
     localStorage.removeItem("token");
-
-
 
     localStorage.removeItem("username");
     localStorage.removeItem("userid");
@@ -71,7 +69,7 @@ function App() {
 
       checkUser();
     }
-  },[token]);
+  }, [token]);
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
       <Header />
@@ -89,11 +87,10 @@ function App() {
         <Route path="/listingRent" element={<HouseRent />} />
         <Route path="/filter" element={<FilterList />} />
         {/* Updated Route */}
-<Route path="/house/:id" element={<Detail />} />
-        <Route path="/addproperty" element={<AddHouseForm />} /> {/* Updated Route */}
-        <Route path="*" element={ 
-              <Four04 />
-              } />
+        <Route path="/house/:id" element={<Detail />} />
+        <Route path="/addproperty" element={<AddHouseForm />} />{" "}
+        {/* Updated Route */}
+        <Route path="*" element={<Four04 />} />
         <Route path="/editprofile" element={<EditProfile />} />
       </Routes>
       <Footer />
