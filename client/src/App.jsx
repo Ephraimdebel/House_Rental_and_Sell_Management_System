@@ -19,6 +19,9 @@ import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
 import HouseProfile from "./components/Chat/HostProfile";
 import FilterPage from "./components/filterPage/filterList";
+import FilterList from "./components/filterPage/filterList";
+import ListingHouseSell from "./components/LinstingHouse/ListingHouseSell";
+import ListingHouseRent from "./components/LinstingHouse/ListingHouseRent";
 
 export const AppState = createContext();
 
@@ -80,15 +83,12 @@ function App() {
         <Route path="/productsale" element={<ProductSale />} />
         <Route path="/user" element={<UserProfile />} />
         <Route path="/owner" element={<OwnerProfile />} />
-        <Route path="/listingSale" element={<HouseSale />} />
-        <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/listingSale" element={<ListingHouseSell />} />
+        <Route path="/listingRent" element={<ListingHouseRent />} />
         <Route path="/filter" element={<FilterList />} />
-        {/* Updated Route */}
-<Route path="/house/:id" element={<Detail />} />
-        <Route path="/addproperty" element={<AddHouseForm />} /> {/* Updated Route */}
-        <Route path="*" element={ 
-              <Four04 />
-              } />
+        <Route path="/house/:id" element={<Detail />} />
+        <Route path="/addproperty" element={<AddHouseForm />} /> 
+        <Route path="*" element={ <Four04 /> } />
       </Routes>
       <Footer />
       <ToastContainer

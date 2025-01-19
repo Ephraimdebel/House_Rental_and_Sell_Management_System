@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import breakingLine from "../../assets/heroImage/breakingLine.png";
 import ProductCard from "./ProductCard";
 import classes from "./Product.module.css";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 function Product() {
   // State to store the fetched data
@@ -15,7 +16,7 @@ function Product() {
     setLoading(true); // Set loading to true when fetching
     try {
       const response = await fetch(
-        `http://localhost:5500/api/housetype?type_id=1&page=${page}&limit=6`
+        `http://localhost:5500/api/housetype?type_id=2&page=${page}&limit=6`
       );
       const data = await response.json();
       console.log(data);
@@ -70,7 +71,8 @@ function Product() {
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
-          Prev
+                    <FaAngleLeft />
+          
         </button>
         <span>
           Page {currentPage} of {totalPages}
@@ -79,7 +81,8 @@ function Product() {
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
         >
-          Next
+                    <FaAngleRight />
+          
         </button>
       </div>
     </div>

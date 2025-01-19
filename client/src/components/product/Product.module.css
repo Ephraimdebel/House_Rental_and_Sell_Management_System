@@ -128,7 +128,10 @@
   background-color: #cccccc;
   cursor: not-allowed;
 }
-
+.pagination{
+  text-align: center;
+  gap: 2px;
+}
 /* Responsive Styles */
 @media (max-width: 1024px) {
   .product__container {
