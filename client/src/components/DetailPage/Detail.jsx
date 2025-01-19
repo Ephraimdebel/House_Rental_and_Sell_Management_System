@@ -149,11 +149,16 @@ console.log("testimonials:",testimonials)
             <div key={index} className={styles.testimonial}>
               <p>
                 <strong>{testimonial.reviewerName}</strong>
-                <div className={styles.rating}>
-                  <Rating value={testimonial?.rate} precision={0.1} />
-                  <small>{testimonial?.count}</small>
-                </div>
               </p>
+              <div className={styles.rating}>
+                {/* Ensure the rate is passed as a valid number */}
+                <Rating
+                  value={Number(testimonial?.rating)}
+                  precision={0.1}
+                  readOnly
+                />
+                {/* <small>{testimonial?.count} reviews</small> */}
+              </div>
               <p>{testimonial?.message}</p>
             </div>
           ))
@@ -163,18 +168,6 @@ console.log("testimonials:",testimonials)
 
         <form onSubmit={handleFormSubmit} className={styles.testimonialForm}>
           <h4>Leave a Testimonial</h4>
-
-          {/* Name Field */}
-          <label htmlFor="userName">Your Name:</label>
-          <input
-            id="userName"
-            type="text"
-            name="userName"
-            value={testimonialForm.userName}
-            placeholder="Enter your name"
-            onChange={handleFormChange}
-            required
-          />
 
           {/* Rating Field */}
           <label htmlFor="rating">Rating:</label>
