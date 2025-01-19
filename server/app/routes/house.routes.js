@@ -7,7 +7,7 @@ const {
   getAllListings,
   getListingsByType,
   getFilteredHouses,
-} = require("../controllers/house_controller");
+} = require("../controllers/house.controller");
 
 const authMiddleware = require("../middlewares/auth_middle_ware");
 const upload = require("../../utils/uploads");

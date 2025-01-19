@@ -13,7 +13,7 @@ const Hero = () => {
     bathrooms: "",
     propertyScope: "",
     propertyType: "",
-    priceRange: [100, 1000],
+    priceRange: [100, 1000000],
   });
 
   const handleInputChange = (e) => {
@@ -42,7 +42,7 @@ const Hero = () => {
     };
   
     const propertyScopeMapping = {
-      sale: 1,
+      Sale: 1,
       Rental: 2,
     };
   
@@ -112,13 +112,15 @@ const Hero = () => {
               <div className={classes.selectContainer}>
                 <label>Property Scope:</label>
                 <select
-                  name="propertyScope"
-                  value={filters.propertyScope}
-                  onChange={handleInputChange}
-                >
-                  <option value="sale">Sale</option>
-                  <option value="Rental">Rental</option>
-                </select>
+  name="propertyScope"
+  value={filters.propertyScope}
+  onChange={handleInputChange}
+>
+  <option value="">Select</option> {/* Add this line */}
+  <option value="Sale">Sale</option>
+  <option value="Rental">Rental</option>
+</select>
+
               </div>
             </div>
 
@@ -127,15 +129,17 @@ const Hero = () => {
               <div className={classes.selectContainer}>
                 <label>Property Type:</label>
                 <select
-                  name="propertyType"
-                  value={filters.propertyType}
-                  onChange={handleInputChange}
-                >
-                  <option value="Apartment">Apartment</option>
-                  <option value="Condo">Condo</option>
-                  <option value="Villa">Villa</option>
-                  <option value="House">House</option>
-                </select>
+  name="propertyType"
+  value={filters.propertyType}
+  onChange={handleInputChange}
+>
+  <option value="">Select</option> {/* Add this line */}
+  <option value="Apartment">Apartment</option>
+  <option value="Condo">Condo</option>
+  <option value="Villa">Villa</option>
+  <option value="House">House</option>
+</select>
+
               </div>
 
               <div className={classes.rangeContainer}>
@@ -145,7 +149,7 @@ const Hero = () => {
                   onChange={handleSliderChange}
                   valueLabelDisplay="auto"
                   min={100}
-                  max={1000}
+                  max={1000000}
                 />
               </div>
 
