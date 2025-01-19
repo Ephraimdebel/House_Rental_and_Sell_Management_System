@@ -48,8 +48,8 @@ function Product() {
       <hr className={classes.breakLine} />
 
       <div className={classes.product__grid}>
-        {productData.length > 0 ? (
-          productData.map((info) => (
+        {productData?.length > 0 ? (
+          productData?.map((info) => (
             <ProductCard key={info.id} data={info} />
           ))
         ) : (
@@ -57,6 +57,7 @@ function Product() {
         )}
       </div>
     </div>
+    
   );
 }
 

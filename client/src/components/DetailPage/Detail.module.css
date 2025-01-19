@@ -62,7 +62,7 @@
 }
 /* About this house Section */
 .descriptionContainer {
-  width: 60%;
+  /* width: 60%; */
   margin-top: 30px;
 }
 .descriptionReservation{
@@ -82,22 +82,26 @@ h3 {
   margin-bottom: 15px;
 }
 
-/* Booking Section */
-.bookingSection {
-  position: sticky;
-  top: 10px;
+ .bookingSection {
   display: flex;
+  flex-direction: column; 
   justify-content: space-between;
   padding: 30px;
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  margin-top: 40px;
+  width: 40%; 
+  position: sticky;
+  top: 100px;
   z-index: 100;
+
 }
+
 
 /* Booking Info */
 .bookingInfo {
-  flex: 1;
+  /* flex: 1; */
   margin-right: 20px;
 }
 
@@ -153,7 +157,7 @@ h3 {
 
 /* Reserve Button */
 .reserveButton {
-  background: linear-gradient(to right, #009DDE, #009DDE);
+  background: linear-gradient(to left, #009DDE, #009DDE);
   color: white;
   padding: 12px 20px;
   font-size: 16px;
@@ -197,19 +201,10 @@ p {
   font-size: 16px;
   color: #333;
 }
-.bookingSection {
-  flex-direction: column; 
-  justify-content: space-between;
-  padding: 30px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-top: 40px;
-  width: 30%; 
-  position: sticky;
-  top: 100px;
-}
 
+.AboutBook {
+  display: flex;
+}
 .guestContainer {
   display: flex;
   align-items: center;
@@ -239,66 +234,154 @@ p {
   color: #333;
 }
 
-
-.bookingSection{
-  display: flex;
-  justify-content: space-between;
-  padding: 30px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-top: 40px;
-  width: 30%;
-  position: sticky;
-  top: 100px;
-margin-left: auto;}
-
-
-.testimonialSection {
-  margin-top: 2rem;
-  padding: 1rem;
-  width: 70%;
-  border-top: 1px solid #ddd;
-}
-
-.testimonial {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
-
-.testimonialForm {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.testimonialForm input,
-.testimonialForm select,
-.testimonialForm textarea {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.testimonialForm button {
-  padding: 0.5rem 1rem;
-  background-color: #275060;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.testimonialForm button:hover {
-  background-color: #1e404d;
-}
-
 .rating {
   display: flex;
   align-items: center;
   padding: 10px 0px;
+}
+
+
+/* General Form Styling */
+.testimonialForm {
+  max-width: 800px; 
+  width: 100%;
+  margin: 50px auto 50px 0; 
+  padding: 30px 40px;
+  background:#F4F4F4;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.testimonialForm:hover {
+  transform: translateY(-2px);
+}
+
+/* Decorative Background Circle */
+.testimonialForm::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 123, 255, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+  animation: float 8s ease-in-out infinite;
+}
+
+.testimonialForm::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(40, 167, 69, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+  animation: float-reverse 10s ease-in-out infinite;
+}
+
+/* Title Styling */
+.testimonialForm h4 {
+  font-size: 2rem;
+  text-align: center;
+  color: #009DDE;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Label Styling */
+.testimonialForm label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #444;
+  font-size: 1rem;
+}
+
+/* Input Fields */
+.testimonialForm input[type="text"],
+.testimonialForm select,
+.testimonialForm textarea {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border: solid #d3d3D3 thin;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #333;
+  background: #f7f7f7;
+  /* box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); */
+  transition: all 0.3s ease;
+}
+
+.testimonialForm input:focus,
+.testimonialForm select:focus,
+.testimonialForm textarea:focus {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+/* Textarea Styling */
+.testimonialForm textarea {
+  height: 150px;
+  resize: none;
+}
+
+/* Button Styling */
+.testimonialForm button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(45deg, #007bff, #00d2ff);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.testimonialForm button:hover {
+  background: linear-gradient(45deg, #0056b3, #008cff);
+  transform: scale(1.03);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Floating Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Hover Effects */
+.testimonialForm input:hover,
+.testimonialForm select:hover,
+.testimonialForm textarea:hover {
+  background: #f4f4f4;
 }
