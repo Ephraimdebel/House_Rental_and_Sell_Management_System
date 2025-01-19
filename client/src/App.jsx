@@ -24,6 +24,8 @@ import FilterList from "./components/filterPage/filterList";
 import ListingHouseSell from "./components/LinstingHouse/ListingHouseSell";
 import ListingHouseRent from "./components/LinstingHouse/ListingHouseRent";
 import AdminDashboard from "./components/AdminDasbord/adminDashbord";
+import AllUsers from "./components/UserTable.jsx/userTable";
+import AllProperties from "./components/AllProperties/allProperties";
 
 export const AppState = createContext();
 
@@ -92,6 +94,9 @@ function App() {
         <Route path="/houseSale/:id" element={<DetailSale />} />
         <Route path="/addproperty" element={<AddHouseForm />} />
         <Route path="/adminDashbord" element={<AdminDashboard />} />
+        <Route path="/allusers" element={<AllUsers />} />
+        <Route path="/allproperties" element={<AllProperties />} />
+
         <Route path="*" element={<Four04 />} />
       </Routes>
       <Footer />
