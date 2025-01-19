@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import FilterCard from "./FilterCard";
+import FilterCard from "./filterCard";
 import classes from "./filter.module.css";
 import NoHouses from "../NoHouse/NoHouses";
 
@@ -53,6 +53,7 @@ const FilterList = () => {
       {houses?.map((house) => (
         <FilterCard
           key={house.id}
+          id={house.id}
           title={house.title}
           location={house.city}
           price={house.price}

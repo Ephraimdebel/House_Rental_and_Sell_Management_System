@@ -1,16 +1,19 @@
 import React from "react";
 import classes from "./filter.module.css";
+import { Link } from "react-router-dom";
 
 const FilterCard = ({
+  id,
   title,
   location,
   price,
   description,
-  specs = [], 
+  specs = [],
   imageUrl,
   type
 }) => {
   return (
+    <Link to={`/house/${id}`}>
     <div className={classes["filter-card"]}>
       <div className={classes["filter-card-content"]}>
         {/* House Details */}
@@ -46,11 +49,11 @@ const FilterCard = ({
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
 export default FilterCard;
-
 
 //http://localhost:5500/api/filteredhouse?category=1&city=Addis%20Ababa&bathrooms=4&type=1&minPrice=500&maxPrice=2000
 //http://localhost:5173/filter?city=Addis%20Ababa&bathrooms=3&type=1&category=2&minPrice=100&maxPrice=1000
