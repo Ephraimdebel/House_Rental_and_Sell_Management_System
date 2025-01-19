@@ -1,42 +1,41 @@
 import React, { useState } from "react";
 import classes from "./Product.module.css";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard({ data }) {
-  // State to manage the cart
-  const [addedToCart, setAddedToCart] = useState(false);
+  const navigate = useNavigate();
 
-  const handleAddToCart = () => {
-    setAddedToCart(true);
-    // Optionally, you can display a message or perform other actions like adding to a shopping cart state
+  const handleCardClick = (id) => {
+    navigate(`/house/${id}`);
   };
+  console.log("data: ",data)
 
   return (
     <div className={classes.productCard}>
       <img
-        src={data.imgLink}
+        src={data.listingPhotoPaths[1]}
         alt={data.location}
         className={classes.productCard__image}
       />
       <div className={classes.productCard__info}>
         <div className={classes.productCard__left}>
-          <h3>{data.location}</h3>
-          <p>{data.bathroom}</p>
+          <h3>{data.city}</h3>
+          <p>{data.bathroomCount} bathrooms</p>
         </div>
         <div className={classes.productCard__right}>
-          <p>{data.propertyType}</p>
-          <p>{data.price}</p>
+          <p>For Rent</p>
+          <p>{data.price}$ per day</p>
         </div>
       </div>
 
-      {/* Add to Cart Button */}
+      {/* View Detail Button */}
       <div className={classes.productCard__buttonContainer}>
-        <button
-          className={classes.addToCartButton}
-          onClick={handleAddToCart}
-          disabled={addedToCart} // Disable button once item is added to cart
-        >
-          {addedToCart ? "Added to Cart" : "Add to Cart"}
-        </button>
+      <button
+    className={classes.addToCartButton}
+    onClick={() => handleCardClick(data.id)} // Corrected here
+  >
+    View Detail
+  </button>
       </div>
     </div>
   );
