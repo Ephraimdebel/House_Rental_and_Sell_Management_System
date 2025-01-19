@@ -118,21 +118,27 @@ console.log("testimonials:",testimonials)
 
       {/* Description Section */}
       <div className={styles.descriptionReservation}>
-        <div className={styles.descriptionContainer}>
-          <h3>About this house</h3>
-          <p className={styles.houseDescription}>{houseData.description}</p>
+        <div className={styles.AboutBook}>
+          <div className={styles.descriptionContainer}>
+            <h3>About this house</h3>
+            <p className={styles.houseDescription}>{houseData.description}</p>
+          </div>
+        </div>
+
+        {/* Booking Section */}
+        <div className={styles.bookingSection}>
+          <BookingCard hostId={houseData.creator_id} listingId={houseData.id} />
         </div>
       </div>
-
-      {/* Booking Section */}
-      <div className={styles.bookingSection}>
-        <BookingCard hostId={houseData.creator_id} listingId={houseData.id} />
-      </div>
-
       {/* YouTube Video Section */}
       <div className={styles.videoSection}>
         <h3>Take a Tour</h3>
-        <ReactPlayer url={houseData.videoUrl} width="67%" height="515px" controls={true} />
+        <ReactPlayer
+          url={houseData.videoUrl}
+          width="67%"
+          height="515px"
+          controls={true}
+        />
       </div>
 
       {/* Testimonial Section */}
@@ -147,12 +153,11 @@ console.log("testimonials:",testimonials)
               <div className={styles.rating}>
                 {/* Ensure the rate is passed as a valid number */}
                 <Rating
-                  value={Number(testimonial?.
-                    rating)}
+                  value={Number(testimonial?.rating)}
                   precision={0.1}
                   readOnly
                 />
-                <small>{testimonial?.count} reviews</small>
+                {/* <small>{testimonial?.count} reviews</small> */}
               </div>
               <p>{testimonial?.message}</p>
             </div>
@@ -161,40 +166,39 @@ console.log("testimonials:",testimonials)
           <p>No testimonials yet. Be the first to leave one!</p>
         )}
 
-<form onSubmit={handleFormSubmit} className={styles.testimonialForm}>
-  <h4>Leave a Testimonial</h4>
-  
+        <form onSubmit={handleFormSubmit} className={styles.testimonialForm}>
+          <h4>Leave a Testimonial</h4>
 
-  {/* Rating Field */}
-  <label htmlFor="rating">Rating:</label>
-  <select
-    id="rating"
-    name="rating"
-    value={testimonialForm.rating}
-    onChange={handleFormChange}
-    required
-  >
-    {[1, 2, 3, 4, 5].map((value) => (
-      <option key={value} value={value}>
-        {value}
-      </option>
-    ))}
-  </select>
+          {/* Rating Field */}
+          <label htmlFor="rating">Rating:</label>
+          <select
+            id="rating"
+            name="rating"
+            value={testimonialForm.rating}
+            onChange={handleFormChange}
+            required
+          >
+            {[1, 2, 3, 4, 5].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
 
-  {/* Message Field */}
-  <label htmlFor="message">Your Testimonial:</label>
-  <textarea
-    id="message"
-    name="review_text"
-    value={testimonialForm.review_text}
-    placeholder="Write your testimonial here"
-    onChange={handleFormChange}
-    required
-  />
+          {/* Message Field */}
+          <label htmlFor="message">Your Testimonial:</label>
+          <textarea
+            id="message"
+            name="review_text"
+            value={testimonialForm.review_text}
+            placeholder="Write your testimonial here"
+            onChange={handleFormChange}
+            required
+          />
 
-  {/* Submit Button */}
-  <button type="submit">Submit</button>
-</form>
+          {/* Submit Button */}
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );

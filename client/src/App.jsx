@@ -14,12 +14,11 @@ import Detail from "./components/DetailPage/Detail";
 import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
 import AboutUs from "./components/AboutUs/AboutUs";
-import { ToastContainer } from "react-toastify"; // Import ToastContainer
+import { ToastContainer } from "react-toastify"; 
 import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
 import HouseProfile from "./components/Chat/HostProfile";
 import FilterPage from "./components/filterPage/filterList";
-import FilterList from "./components/filterPage/filterList";
 
 export const AppState = createContext();
 

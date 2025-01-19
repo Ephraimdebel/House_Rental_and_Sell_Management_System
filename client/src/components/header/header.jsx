@@ -1,47 +1,57 @@
 import React, { useState } from "react";
-import "./header.css";
+import classes from "./header.module.css"; 
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="header">
-      <nav className="nav">
-        <div className="logo">Infinity Houses</div>
+    <header className={classes.header}>
+      <nav className={classes.nav}>
+        <div className={classes.logo}>Infinity Houses</div>
         <button
-          className="menu-icon"
+          className={classes["menu-icon"]}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
         >
           ☰
         </button>
-        <ul className={`menu-items ${isMenuOpen ? "menu-open" : ""}`}>
-          <li className="menu-item">
-            <a href="/" className="link">
+        <ul
+          className={`${classes["menu-items"]} ${
+            isMenuOpen ? classes["menu-open"] : ""
+          }`}
+        >
+          <li className={classes["menu-item"]}>
+            <a href="/" className={classes.link}>
               Home
             </a>
           </li>
-          <li className="menu-item">
-            <a href="/listingSale" className="link">
+          <li className={classes["menu-item"]}>
+            <a href="/listingSale" className={classes.link}>
               Sale
             </a>
           </li>
-          <li className="menu-item">
-            <a href="listingRent" className="link">
+          <li className={classes["menu-item"]}>
+            <a href="/listingRent" className={classes.link}>
               Rentals
             </a>
           </li>
-          <li className="menu-item">
-            <a href="/contact" className="link">
+          <li className={classes["menu-item"]}>
+            <a href="/about" className={classes.link}>
+              About Us
+            </a>
+          </li>
+          <li className={classes["menu-item"]}>
+            <a href="/contact" className={classes.link}>
               Contact Us
             </a>
           </li>
-          <li className="menu-item">
-            <a href="/login" className="link">
+          <li className={classes["menu-item"]}>
+            <a href="/login" className={classes.link}>
               Login
             </a>
           </li>
-          <li className="menu-item">
-            <a href="/user" className="link">
+          <li className={classes["menu-item"]}>
+            <a href="/user" className={classes.link}>
               Profile
             </a>
           </li>
