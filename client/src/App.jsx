@@ -6,12 +6,10 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Hero from "./components/hero_banner/Hero";
-import EditProfile from "./components/edit_profile/edit_profile";
 import Product from "./components/product/Product";
 import ProductSale from "./components/product/ProductSale";
 import Home from "./pages/Home/Home";
 import UserProfile from "./components/user_profile/user_profile";
-import PostHouse from "./components/post_house/post_house";
 import OwnerProfile from "./components/owner_profile/owner_profile";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
@@ -21,12 +19,15 @@ import Detail from "./components/DetailPage/Detail";
 import Login from "./pages/Login/Login";
 import Four04 from "./components/Four04/Four04";
 import AboutUs from "./components/AboutUs/AboutUs";
-import { ToastContainer } from "react-toastify"; // Import ToastContainer
+import { ToastContainer } from "react-toastify";
 import axios from "./Api/axios";
 import AddHouseForm from "./components/AddProperty/AddProperty ";
 import HouseProfile from "./components/Chat/HostProfile";
 import FilterPage from "./components/filterPage/filterList";
 import FilterList from "./components/filterPage/filterList";
+import ListingHouseSell from "./components/LinstingHouse/ListingHouseSell";
+import ListingHouseRent from "./components/LinstingHouse/ListingHouseRent";
+import Notification from "./components/notification/notification";
 
 export const AppState = createContext();
 
@@ -80,18 +81,15 @@ function App() {
         <Route path="/products" element={<Product />} />
         <Route path="/productsale" element={<ProductSale />} />
         <Route path="/user" element={<UserProfile />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/posthouse" element={<PostHouse />} />
         <Route path="/owner" element={<OwnerProfile />} />
-        <Route path="/listingSale" element={<HouseSale />} />
-        <Route path="/listingRent" element={<HouseRent />} />
+        <Route path="/listingSale" element={<ListingHouseSell />} />
+        <Route path="/listingRent" element={<ListingHouseRent />} />
         <Route path="/filter" element={<FilterList />} />
-        {/* Updated Route */}
         <Route path="/house/:id" element={<Detail />} />
-        <Route path="/addproperty" element={<AddHouseForm />} />{" "}
-        {/* Updated Route */}
+        <Route path="/addproperty" element={<AddHouseForm />} />
+        <Route path="/notification" element={<Notification />} />
+        24px
         <Route path="*" element={<Four04 />} />
-        <Route path="/editprofile" element={<EditProfile />} />
       </Routes>
       <Footer />
       <ToastContainer

@@ -1,49 +1,80 @@
-import React, { useState } from "react";
-import "./header.css";
+import React, { useContext, useState } from "react";
+import classes from "./header.module.css";
+import { AppState } from "../../App";
+import { Link } from "react-router-dom";
+import { MdCircleNotifications } from "react-icons/md";
+import { messageLength } from "../notification/notification";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const { handleLogout, user } = useContext(AppState);
 
   return (
-    <header className="header">
-      <nav className="nav">
-        <div className="logo">Infinity Houses</div>
+    <header className={classes.header}>
+      <nav className={classes.nav}>
+        <div className={classes.logo}>Infinity Houses</div>
         <button
-          className="menu-icon"
+          className={classes["menu-icon"]}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
         >
           ☰
         </button>
-        <ul className={`menu-items ${isMenuOpen ? "menu-open" : ""}`}>
-          <li className="menu-item">
-            <a href="/" className="link">
+        <ul
+          className={`${classes["menu-items"]} ${
+            isMenuOpen ? classes["menu-open"] : ""
+          }`}
+        >
+          <li className={classes["menu-item"]}>
+            <Link to="/" className={classes.link}>
               Home
-            </a>
+            </Link>
           </li>
-          <li className="menu-item">
-            <a href="/listingSale" className="link">
+          <li className={classes["menu-item"]}>
+            <Link to="/listingSale" className={classes.link}>
               Sale
-            </a>
+            </Link>
           </li>
-          <li className="menu-item">
-            <a href="listingRent" className="link">
+          <li className={classes["menu-item"]}>
+            <Link to="/listingRent" className={classes.link}>
               Rentals
-            </a>
+            </Link>
           </li>
-          <li className="menu-item">
-            <a href="/contact" className="link">
+          <li className={classes["menu-item"]}>
+            <Link to="/about" className={classes.link}>
+              About Us
+            </Link>
+          </li>
+          <li className={classes["menu-item"]}>
+            <Link to="/contact" className={classes.link}>
               Contact Us
-            </a>
+            </Link>
           </li>
-          <li className="menu-item">
-            <a href="/login" className="link">
-              Login
-            </a>
-          </li>
-          <li className="menu-item">
-            <a href="/user" className="link">
+
+          <li className={classes["menu-item"]}>
+            <Link to="/user" className={classes.link}>
               Profile
-            </a>
+            </Link>
+          </li>
+          <li className={classes["menu-item"]}>
+            {token ? (
+              <>
+                <button className="button-container" onClick={handleLogout}>
+                  LOG OUT
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className={classes.link}>
+                  <button className="button-container">SIGN IN</button>
+                </Link>
+                <Link to="/notification">
+                  <MdCircleNotifications style={{ fontSize: "54px" }} />
+                  <span color="red">{messageLength}</span>
+                </Link>
+              </>
+            )}
           </li>
         </ul>
       </nav>

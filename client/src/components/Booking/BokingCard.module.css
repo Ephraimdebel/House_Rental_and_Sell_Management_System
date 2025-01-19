@@ -1,13 +1,13 @@
 .bookingCard {
-    border: 1px solid #ddd;
     padding: 1rem;
     border-radius: 8px;
-    background-color: #f9f9f9;
     max-width: 400px;
     margin: auto;
   }
   
   .bookingCard h3 {
+    text-align: center;
+    color: #333333;
     margin-bottom: 1rem;
   }
   
@@ -15,6 +15,7 @@
     display: block;
     margin-bottom: 0.5rem;
   }
+  
   
   .bookingCard input {
     width: 100%;
@@ -25,7 +26,8 @@
   }
   
   .bookingButton {
-    background-color: #275060;
+    width: 100%;
+    background-color: #009DDE;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
@@ -33,9 +35,7 @@
     cursor: pointer;
   }
   
-  .bookingButton:hover {
-    background-color: #1e3d48;
-  }
+
   
   .bookingMessage {
     margin-top: 1rem;

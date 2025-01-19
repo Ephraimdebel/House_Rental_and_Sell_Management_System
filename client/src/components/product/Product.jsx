@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { productData } from "./productData"; // Use productData instead of categoryInfos
 import breakingLine from "../../assets/heroImage/breakingLine.png";
 import ProductCard from "./ProductCard";
 import classes from "./Product.module.css";
