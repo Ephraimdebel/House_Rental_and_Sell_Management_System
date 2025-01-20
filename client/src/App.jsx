@@ -77,7 +77,6 @@ function App() {
       checkUser();
     }
   }, [token]);
-  }, [token]);
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
       <Header />
