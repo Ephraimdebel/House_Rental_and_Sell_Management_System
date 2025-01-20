@@ -1,8 +1,8 @@
 .bookingCard {
-    padding: 1rem;
+    /* padding: 1rem; */
     border-radius: 8px;
-    max-width: 400px;
-    margin: auto;
+    max-width: 600px;
+    /* margin: auto; */
   }
   
   .bookingCard h3 {
@@ -41,4 +41,4 @@
     margin-top: 1rem;
     color: red;
   }
-  
+    

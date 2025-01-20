@@ -68,7 +68,7 @@
 .descriptionReservation{
   position: relative;
   display: flex;
-  gap: 300px;
+  gap: 100px;
 }
 h3 {
   font-size: 20px;
@@ -77,6 +77,7 @@ h3 {
 }
 
 .houseDescription {
+  width: 60%;
   font-size: 16px;
   color: #555;
   line-height: 1.6;
@@ -90,7 +91,7 @@ h3 {
   top: 10px;
   display: flex;
   justify-content: space-between;
-  padding: 30px;
+  padding: 30px 110px 30px 110px;
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
