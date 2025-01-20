@@ -12,7 +12,7 @@ function Product() {
   const fetchProductData = async () => {
     try {
       const response = await fetch(
-        "http://10.5.90.124:5500/api/housetype?type_id=1"
+        "http://localhost:5500/api/housetype?type_id=1"
       );
       const data = await response.json();
       console.log(data);

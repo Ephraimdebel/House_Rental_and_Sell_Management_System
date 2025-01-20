@@ -31,6 +31,9 @@ import FilterList from "./components/filterPage/filterList";
 import ListingHouseSell from "./components/LinstingHouse/ListingHouseSell";
 import ListingHouseRent from "./components/LinstingHouse/ListingHouseRent";
 import AdminDashboard from "./components/AdminDasbord/adminDashbord";
+import AllUsers from "./components/UserTable.jsx/userTable";
+import AllProperties from "./components/AllProperties/allProperties";
+import DisplayBooking from "./components/OwnerDashBord/DisplayBooking";
 
 export const AppState = createContext();
 
@@ -74,7 +77,6 @@ function App() {
       checkUser();
     }
   }, [token]);
-  }, [token]);
   return (
     <AppState.Provider value={{ user, setUser, handleLogout }}>
       <Header />
@@ -95,6 +97,10 @@ function App() {
         <Route path="/houseSale/:id" element={<DetailSale />} />
         <Route path="/addproperty" element={<AddHouseForm />} />
         <Route path="/adminDashbord" element={<AdminDashboard />} />
+        <Route path="/allusers" element={<AllUsers />} />
+        <Route path="/allproperties" element={<AllProperties />} />
+        <Route path="/displaybooking" element={<DisplayBooking />} />
+
         <Route path="*" element={<Four04 />} />
       </Routes>
       <Footer />

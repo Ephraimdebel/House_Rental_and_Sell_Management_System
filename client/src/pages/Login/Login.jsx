@@ -91,9 +91,9 @@ const Login = () => {
         console.log(response);
         if (response.status === 200) {
           toast.success("Login successful!");
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("username", response.data.username);
-          localStorage.setItem("userid", response.data.userid);
+          localStorage.setItem("token", response?.data.token);
+          localStorage.setItem("username", response?.data.username);
+          localStorage.setItem("userid", response?.data.userid);
           setUser(response.data); // Update user context if necessary
         } else {
           toast.error(
@@ -128,8 +128,8 @@ const Login = () => {
       console.error("My current error", error?.response?.data?.msg);
       if (
         error.response ||
-        error.response.data ||
-        error.response.data.message
+        error.response?.data ||
+        error.response?.data?.message
       ) {
         toast.error(error?.response?.data?.msg);
       } else {
